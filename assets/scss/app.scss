@@ -1,0 +1,14 @@
+* {
+  font-family: "SF Compact Rounded", serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.__block:hover {
+  outline: 2px solid red;
+  @apply rounded;
+}
