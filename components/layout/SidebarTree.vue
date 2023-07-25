@@ -8,7 +8,7 @@ const props = defineProps<{
   index: number;
 }>();
 
-const { move, remove, setBlocks } = useBlocks();
+const { remove, setBlocks } = useBlocks();
 
 const innerChildren = ref(props.children);
 const openBlocksIds: Ref<Record<string, boolean>> = ref({});

@@ -55,44 +55,6 @@ export const useBlocks = () => {
     ];
   };
 
-  const move = (blockId: string, direction: "up" | "down") => {
-    const copiedBlocks = blocksState.value;
-    const index = copiedBlocks.findIndex((e) => e.id === blockId);
-
-    if (index === -1) {
-      const array = findContainingArray(copiedBlocks, blockId, [])!;
-      const indexes = array.indexes.reverse();
-
-      const movedBlockIndex = indexes[indexes.length - 1];
-      if (movedBlockIndex === 0) {
-        
-      }
-
-      let blocks = copiedBlocks;
-      for (const index of indexes) {
-        const block = blocks[index];
-        if (isContainerBlock(block)) {
-          blocks = block.children;
-        }
-      }
-
-      console.log(blocks);
-    } else {
-      if (index === 0 && direction === "up") {
-        return;
-      }
-
-      const newIndex = direction === "up" ? index - 1 : index + 1;
-      copiedBlocks[index] = copiedBlocks.splice(
-        newIndex,
-        1,
-        copiedBlocks[index]
-      )[0];
-    }
-
-    blocksState.value = copiedBlocks;
-  };
-
   const setBlocks = (blocks: Array<Block>) => {
     blocksState.value = blocks;
   };
@@ -106,7 +68,6 @@ export const useBlocks = () => {
     setBlocks,
     add,
     remove,
-    move,
     canUndo,
     undo,
   };
