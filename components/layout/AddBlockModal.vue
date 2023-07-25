@@ -7,15 +7,18 @@ const emit = defineEmits<{
 }>();
 
 const { add } = useBlocks();
+const searchQuery = ref("");
 const selectedCategory = ref(0);
 const selectedBlock: Ref<string | null> = ref(null);
 
 const blocks = computed(() => {
-  if (selectedCategory.value === 0) {
-    return allBlocks;
+  let _blocks = allBlocks;
+  if (selectedCategory.value !== 0) {
+    _blocks = allBlocks.filter((e) => e.categoryId === selectedCategory.value);
   }
 
-  return allBlocks.filter((e) => e.categoryId === selectedCategory.value);
+  const query = searchQuery.value.toLowerCase();
+  return _blocks.filter((e) => e.name.toLowerCase().includes(query));
 });
 
 const insertNewBlock = () => {
@@ -32,9 +35,16 @@ const insertNewBlock = () => {
   <div class="modal-wrapper absolute w-full h-full top-0 left-0 z-36">
     <div class="bg-white shadow-lg rounded">
       <div
-        class="bg-white p-4 border-solid border-0 border-b border-gray rounded-t"
+        class="flex justify-between items-center bg-white p-4 border-solid border-0 border-b border-gray rounded-t"
       >
         <h2 class="m-0">Blocks Library</h2>
+
+        <input
+          v-model="searchQuery"
+          class="px-4 py-2 border-solid border-1 border-gray focus:outline-blue-500 rounded"
+          type="text"
+          placeholder="Search..."
+        />
       </div>
 
       <div class="library bg-white rounded-b">
@@ -55,19 +65,22 @@ const insertNewBlock = () => {
         <div>
           <div class="h-70 overflow-scroll p-8">
             <div class="grid grid-cols-3 gap-4">
-              <div
-                v-for="block in blocks"
-                :key="block.default.type"
-                class="px-4 py-3 border rounded cursor-pointer"
-                :class="
-                  selectedBlock === block.default.type
-                    ? 'border-dashed border-blue bg-blue-100'
-                    : 'border-solid border-gray'
-                "
-                @click="() => (selectedBlock = block.default.type)"
-              >
-                <p class="m-0">{{ block.name }}</p>
-              </div>
+              <template v-if="blocks.length > 1">
+                <div
+                  v-for="block in blocks"
+                  :key="block.default.type"
+                  class="px-4 py-3 border rounded cursor-pointer"
+                  :class="
+                    selectedBlock === block.default.type
+                      ? 'border-dashed border-blue bg-blue-100'
+                      : 'border-solid border-gray'
+                  "
+                  @click="() => (selectedBlock = block.default.type)"
+                >
+                  <p class="m-0">{{ block.name }}</p>
+                </div>
+              </template>
+              <p class="m-0" v-else>No blocks found.</p>
             </div>
           </div>
 
