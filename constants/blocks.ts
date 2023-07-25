@@ -16,6 +16,7 @@ export default [
       id: "-1",
       name: "Container",
       type: "container",
+      children: [],
     } as ContainerBlock,
   },
   {
