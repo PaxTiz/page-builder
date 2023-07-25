@@ -17,8 +17,15 @@
         <span class="text-white text-sm font-bold">Page URL :</span>
         <input
           type="text"
-          class="bg-transparent text-white border-none focus:outline-none p-2"
-          value="/my-new-page"
+          class="w-auto bg-transparent text-gray border-none focus:outline-none p-2 pr-0"
+          value="http://localhost:3000/"
+          disabled
+        />
+        <input
+          type="text"
+          class="bg-transparent text-white border-none focus:outline-none p-2 pl-0 -ml-1"
+          value="my-new-page"
+          oninput="this.style.width = `${this.value.length}ch`"
         />
       </div>
     </div>
