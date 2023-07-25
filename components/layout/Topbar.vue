@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="topbar fixed bg-gray-900 shadow flex items-center justify-between"
+    class="topbar fixed bg-gray-900 shadow-white flex items-center justify-between"
   >
     <div class="flex items-center gap-4 ml-4">
       <div>
@@ -42,5 +42,6 @@
 .topbar {
   z-index: 100;
   width: calc(100% - 350px);
+  left: 350px;
 }
 </style>

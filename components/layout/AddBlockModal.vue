@@ -32,8 +32,8 @@ const insertNewBlock = () => {
 </script>
 
 <template>
-  <div class="modal-wrapper absolute w-full h-full top-0 left-0 z-36">
-    <div class="bg-gray-900 shadow-[0_0_3px_rgba(255,255,255,0.8)] rounded">
+  <div class="modal-wrapper fixed w-full h-full top-0 left-0">
+    <div class="bg-gray-900 shadow-white rounded">
       <div
         class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
       >
@@ -109,6 +109,7 @@ const insertNewBlock = () => {
 
 <style lang="scss" scoped>
 .modal-wrapper {
+  z-index: 150;
   display: flex;
   justify-content: center;
   align-items: center;

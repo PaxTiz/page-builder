@@ -102,24 +102,21 @@ setBlocks([
 </script>
 
 <template>
-  <div class="app bg-gray-800">
+  <div class="bg-gray-800">
     <Sidebar :children="blocks" />
+    <Topbar />
 
-    <div class="w-full">
-      <Topbar />
-
-      <div class="w-full z-0 px-8 mt-20">
-        <div class="border shadow-lg bg-gray-900 rounded">
-          <PageRenderer :children="blocks" />
-        </div>
+    <div class="page pt-20 z-0 px-8">
+      <div class="shadow-white bg-gray-900 rounded">
+        <PageRenderer :children="blocks" />
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.app {
-  display: grid;
-  grid-template-columns: 350px 1fr;
+.page {
+  margin-left: 350px;
+  width: calc(100% - 350px);
 }
 </style>
