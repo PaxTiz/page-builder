@@ -21,7 +21,6 @@ defineProps<{
       @update:modelValue="(value) => $emit('update:modelValue', value)"
     >
       <template #default="{ node, stat }">
-        <!-- {{ stat.data }} -->
         <SidebarTreeItem
           :block="node"
           :open="stat.open"
