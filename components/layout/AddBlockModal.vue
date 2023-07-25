@@ -87,14 +87,9 @@ const insertNewBlock = () => {
           <div
             class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-gray-700"
           >
+            <button class="button-red" @click="emit('close')">Cancel</button>
             <button
-              class="flex w-fit px-8 py-2 border-none bg-red-700 hover:bg-red-600 text-white no-underline rounded cursor-pointer transition-colors duration-300"
-              @click="emit('close')"
-            >
-              Cancel
-            </button>
-            <button
-              class="flex w-fit px-8 py-2 border-none bg-blue-700 hover:bg-blue-600 disabled:bg-blue-400 text-white no-underline rounded cursor-pointer transition-colors duration-300"
+              class="button-blue"
               :disabled="selectedBlock === null"
               @click="insertNewBlock"
             >

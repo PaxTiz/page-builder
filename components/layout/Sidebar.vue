@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Block } from "~/types";
-import AddBlockModal from "./AddBlockModal.vue";
+
 import SidebarTree from "./SidebarTree.vue";
 
 const props = defineProps<{
@@ -8,7 +8,6 @@ const props = defineProps<{
 }>();
 
 const { canUndo, undo, setBlocks } = useBlocks();
-const { isActive, toggle } = useModal("modal_add_block");
 
 const childrenTree = toRef(props, "children");
 
@@ -16,23 +15,16 @@ watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
 </script>
 
 <template>
-  <AddBlockModal v-if="isActive" @close="toggle" />
-
-  <div class="sidebar fixed h-screen bg-gray-900 shadow-white z-10">
-    <button
-      class="fixed w-[350px] text-white bg-blue-700 hover:bg-blue-600 transition-colors duration-300 font-bold uppercase p-4"
-      @click="toggle"
-    >
-      New block
-    </button>
-
+  <div
+    class="sidebar fixed h-screen overflow-scroll bg-gray-900 shadow-white z-10"
+  >
     <div class="mt-16 mb-8">
       <SidebarTree v-model="childrenTree" />
     </div>
 
     <div
       v-if="canUndo"
-      class="absolute flex items-center justify-center bottom-4 left-0 w-full"
+      class="undo fixed flex items-center justify-center bottom-4 left-0 w-full"
     >
       <div
         class="flex items-center gap-2 bg-black hover:opacity-80 transition-all duration-300 text-white text-xs rounded-3xl px-8 py-2 cursor-pointer select-none"
@@ -55,7 +47,8 @@ watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
 </template>
 
 <style lang="scss" scoped>
-.sidebar {
+.sidebar,
+.undo {
   width: 350px;
 
   button {
