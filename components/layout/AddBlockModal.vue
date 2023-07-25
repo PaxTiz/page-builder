@@ -21,11 +21,7 @@ const blocks = computed(() => {
 const insertNewBlock = () => {
   if (selectedBlock.value) {
     const block = allBlocks.find((e) => e.default.type === selectedBlock.value);
-    if (!block) {
-      throw new Error(`Block '${selectedBlock.value} was not found'`);
-    }
-
-    add(block.default);
+    add(block!.default);
   }
 
   emit("close");
@@ -42,7 +38,9 @@ const insertNewBlock = () => {
       </div>
 
       <div class="library bg-white rounded-b">
-        <div class="max-h-80 overflow-scroll flex flex-col shadow-xl">
+        <div
+          class="overflow-scroll flex flex-col border-solid border-0 border-r border-gray"
+        >
           <div
             v-for="category in categories"
             :key="category.id"
@@ -54,24 +52,28 @@ const insertNewBlock = () => {
           </div>
         </div>
 
-        <div class="max-h-80 overflow-scroll">
-          <div class="grid grid-cols-3 gap-4 p-8">
-            <div
-              v-for="block in blocks"
-              :key="block.default.type"
-              class="px-4 py-3 border rounded cursor-pointer"
-              :class="
-                selectedBlock === block.default.type
-                  ? 'border-dashed border-blue bg-blue-100'
-                  : 'border-solid border-gray'
-              "
-              @click="() => (selectedBlock = block.default.type)"
-            >
-              <p class="m-0">{{ block.name }}</p>
+        <div>
+          <div class="h-70 overflow-scroll p-8">
+            <div class="grid grid-cols-3 gap-4">
+              <div
+                v-for="block in blocks"
+                :key="block.default.type"
+                class="px-4 py-3 border rounded cursor-pointer"
+                :class="
+                  selectedBlock === block.default.type
+                    ? 'border-dashed border-blue bg-blue-100'
+                    : 'border-solid border-gray'
+                "
+                @click="() => (selectedBlock = block.default.type)"
+              >
+                <p class="m-0">{{ block.name }}</p>
+              </div>
             </div>
           </div>
 
-          <div class="flex justify-end gap-4 px-8 py-4">
+          <div
+            class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-gray"
+          >
             <button
               class="flex w-fit px-8 py-2 border-none bg-red-600 hover:bg-red-500 text-white no-underline rounded cursor-pointer transition-colors duration-300"
               @click="emit('close')"
