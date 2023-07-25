@@ -21,16 +21,13 @@ watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
     @close="() => (showAddBlockModal = false)"
   />
 
-  <div class="sidebar relative h-screen bg-white shadow-xl z-10">
-    <div class="flex shadow">
-      <button class="px-4 py-2 text-xl bg-white">&cross;</button>
-      <button
-        class="w-full text-white bg-blue-500 font-bold uppercase"
-        @click="() => (showAddBlockModal = true)"
-      >
-        New block
-      </button>
-    </div>
+  <div class="sidebar relative h-screen bg-white shadow z-10">
+    <button
+      class="w-full text-white bg-blue-500 hover:bg-blue-600 transition-colors duration-300 font-bold uppercase p-4"
+      @click="() => (showAddBlockModal = true)"
+    >
+      New block
+    </button>
 
     <div class="mt-4">
       <SidebarTree v-model="childrenTree" />

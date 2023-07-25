@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { nanoid } from "nanoid";
 import Sidebar from "~/components/layout/Sidebar.vue";
+import Topbar from "~/components/layout/Topbar.vue";
 import PageRenderer from "~/components/page/PageRenderer.vue";
 
 const { blocks, setBlocks } = useBlocks();
@@ -104,8 +105,14 @@ setBlocks([
   <div class="app bg-gray-100">
     <Sidebar :children="blocks" />
 
-    <div class="w-full bg-white z-0 px-8">
-      <PageRenderer :children="blocks" />
+    <div class="w-full">
+      <Topbar />
+
+      <div class="w-full z-0 px-8 mt-20">
+        <div class="border shadow-lg bg-white rounded">
+          <PageRenderer :children="blocks" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
