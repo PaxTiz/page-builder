@@ -21,9 +21,9 @@ watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
     @close="() => (showAddBlockModal = false)"
   />
 
-  <div class="sidebar relative h-screen bg-white shadow z-10">
+  <div class="sidebar relative h-screen bg-gray-900 shadow z-10">
     <button
-      class="w-full text-white bg-blue-500 hover:bg-blue-600 transition-colors duration-300 font-bold uppercase p-4"
+      class="w-full text-white bg-blue-700 hover:bg-blue-600 transition-colors duration-300 font-bold uppercase p-4"
       @click="() => (showAddBlockModal = true)"
     >
       New block

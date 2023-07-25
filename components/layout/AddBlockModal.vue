@@ -33,32 +33,32 @@ const insertNewBlock = () => {
 
 <template>
   <div class="modal-wrapper absolute w-full h-full top-0 left-0 z-36">
-    <div class="bg-white shadow-lg rounded">
+    <div class="bg-gray-900 shadow-[0_0_3px_rgba(255,255,255,0.8)] rounded">
       <div
-        class="flex justify-between items-center bg-white p-4 border-solid border-0 border-b border-gray rounded-t"
+        class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
       >
-        <h2 class="m-0">Blocks Library</h2>
+        <h2 class="text-white m-0">Blocks Library</h2>
 
         <input
           v-model="searchQuery"
-          class="px-4 py-2 border-solid border-1 border-gray focus:outline-blue-500 rounded"
+          class="px-4 py-2 text-white bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded"
           type="text"
           placeholder="Search..."
         />
       </div>
 
-      <div class="library bg-white rounded-b">
+      <div class="library bg-gray-900 rounded-b">
         <div
-          class="overflow-scroll flex flex-col border-solid border-0 border-r border-gray"
+          class="overflow-scroll flex flex-col border-solid border-0 border-r border-gray-700"
         >
           <div
             v-for="category in categories"
             :key="category.id"
-            class="px-4 py-2 cursor-pointer hover:bg-gray-100"
-            :class="{ 'bg-gray-200': selectedCategory === category.id }"
+            class="px-4 py-2 cursor-pointer hover:bg-gray-800"
+            :class="{ 'bg-gray-800': selectedCategory === category.id }"
             @click="() => (selectedCategory = category.id)"
           >
-            {{ category.name }}
+            <span class="text-white">{{ category.name }}</span>
           </div>
         </div>
 
@@ -69,32 +69,32 @@ const insertNewBlock = () => {
                 <div
                   v-for="block in blocks"
                   :key="block.default.type"
-                  class="px-4 py-3 border rounded cursor-pointer"
+                  class="px-4 py-3 border rounded cursor-pointer transition-colors duration-100"
                   :class="
                     selectedBlock === block.default.type
-                      ? 'border-dashed border-blue bg-blue-100'
-                      : 'border-solid border-gray'
+                      ? 'border-dashed border-blue'
+                      : 'border-solid border-gray bg-gray-800'
                   "
                   @click="() => (selectedBlock = block.default.type)"
                 >
-                  <p class="m-0">{{ block.name }}</p>
+                  <p class="text-white m-0">{{ block.name }}</p>
                 </div>
               </template>
-              <p class="m-0" v-else>No blocks found.</p>
+              <p class="text-white m-0" v-else>No blocks found.</p>
             </div>
           </div>
 
           <div
-            class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-gray"
+            class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-gray-700"
           >
             <button
-              class="flex w-fit px-8 py-2 border-none bg-red-600 hover:bg-red-500 text-white no-underline rounded cursor-pointer transition-colors duration-300"
+              class="flex w-fit px-8 py-2 border-none bg-red-700 hover:bg-red-600 text-white no-underline rounded cursor-pointer transition-colors duration-300"
               @click="emit('close')"
             >
               Cancel
             </button>
             <button
-              class="flex w-fit px-8 py-2 border-none bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white no-underline rounded cursor-pointer transition-colors duration-300"
+              class="flex w-fit px-8 py-2 border-none bg-blue-700 hover:bg-blue-600 disabled:bg-blue-400 text-white no-underline rounded cursor-pointer transition-colors duration-300"
               :disabled="selectedBlock === null"
               @click="insertNewBlock"
             >
@@ -112,7 +112,7 @@ const insertNewBlock = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(1px);
 }
 

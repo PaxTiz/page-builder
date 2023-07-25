@@ -16,7 +16,7 @@ defineProps<{
     </div>
 
     <a
-      class="px-8 py-2 bg-white hover:bg-gray-50 text-blue-500 no-underline rounded cursor-pointer transition-colors duration-300 shadow-xl"
+      class="px-8 py-2 bg-gray-900 hover:bg-gray-50 text-blue-500 no-underline rounded cursor-pointer transition-colors duration-300 shadow-xl"
       :href="block.url"
       >{{ block.buttonText }}</a
     >

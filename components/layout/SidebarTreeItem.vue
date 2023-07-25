@@ -14,7 +14,7 @@ const { remove } = useBlocks();
 
 <template>
   <div
-    class="sidebar__item flex items-center justify-between px-4 py-3 hover:bg-gray-100"
+    class="sidebar__item flex items-center justify-between px-4 py-3 hover:bg-gray-800 rounded-l"
   >
     <div class="flex items-center gap-2">
       <template v-if="isContainerBlock(block)">
@@ -23,7 +23,7 @@ const { remove } = useBlocks();
           v-if="open"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          style="width: 24px; height: 24px"
+          class="arrow"
           @click="$emit('toggle')"
         >
           <path
@@ -36,7 +36,7 @@ const { remove } = useBlocks();
           v-if="!open"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          style="width: 24px; height: 24px"
+          class="arrow"
           @click="$emit('toggle')"
         >
           <path
@@ -46,7 +46,7 @@ const { remove } = useBlocks();
       </template>
       <div style="width: 24px" v-else></div>
 
-      <span>{{ block.name }}</span>
+      <span class="text-white">{{ block.name }}</span>
     </div>
 
     <div class="flex items-center gap-2">
@@ -65,6 +65,14 @@ const { remove } = useBlocks();
 </template>
 
 <style lang="scss" scoped>
+.arrow {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+}
+.sidebar__item .trash path {
+  @apply fill-white;
+}
 .sidebar__item:hover .trash path {
   @apply fill-red;
 }

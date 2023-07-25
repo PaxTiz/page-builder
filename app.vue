@@ -102,14 +102,14 @@ setBlocks([
 </script>
 
 <template>
-  <div class="app bg-gray-100">
+  <div class="app bg-gray-800">
     <Sidebar :children="blocks" />
 
     <div class="w-full">
       <Topbar />
 
       <div class="w-full z-0 px-8 mt-20">
-        <div class="border shadow-lg bg-white rounded">
+        <div class="border shadow-lg bg-gray-900 rounded">
           <PageRenderer :children="blocks" />
         </div>
       </div>
