@@ -3,12 +3,16 @@ import { Block } from "~/types";
 import AddBlockModal from "./AddBlockModal.vue";
 import SidebarTree from "./SidebarTree.vue";
 
-defineProps<{
+const props = defineProps<{
   children: Array<Block>;
 }>();
 
-const { canUndo, undo } = useBlocks();
+const { canUndo, undo, setBlocks } = useBlocks();
 const showAddBlockModal = ref(false);
+
+const childrenTree = toRef(props, "children");
+
+watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
 </script>
 
 <template>
@@ -28,12 +32,8 @@ const showAddBlockModal = ref(false);
       </button>
     </div>
 
-    <div class="sidebar__body">
-      <div class="px-4 py-2">
-        <h2 class="mb-2">Blocks tree</h2>
-      </div>
-
-      <SidebarTree :children="children" :full-blocks="children" :index="0" />
+    <div class="mt-4">
+      <SidebarTree v-model="childrenTree" />
     </div>
 
     <div
