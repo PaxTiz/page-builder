@@ -4,6 +4,11 @@ export interface BaseBlock {
   type: string;
 }
 
+export type SizedBlock = BaseBlock & {
+  width?: number;
+  height?: number;
+};
+
 export type BlockWithChildren = BaseBlock & {
   children: Array<Block>;
 };
@@ -27,7 +32,7 @@ export type CallToActionBlock = BaseBlock & {
   buttonText: string;
 };
 
-export type ImageBlock = BaseBlock & {
+export type ImageBlock = SizedBlock & {
   type: "image";
   title: string;
   url: string;
@@ -50,10 +55,8 @@ export type CarouselBlock = BlockWithChildren & {
   navigation: boolean;
 };
 
-export type SpacerBlock = BaseBlock & {
+export type SpacerBlock = SizedBlock & {
   type: "spacer";
-  width?: number;
-  height?: number;
 };
 
 export type Block =
