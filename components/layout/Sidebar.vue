@@ -27,7 +27,7 @@ watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
       class="undo fixed flex items-center justify-center bottom-4 left-0 w-full"
     >
       <div
-        class="flex items-center gap-2 bg-black hover:opacity-80 transition-all duration-300 text-white text-xs rounded-3xl px-8 py-2 cursor-pointer select-none"
+        class="flex items-center gap-2 bg-black hover:opacity-80 transition-all duration-300 text-gray-300 text-xs rounded-3xl px-8 py-2 cursor-pointer select-none"
         @click="() => undo()"
       >
         <svg

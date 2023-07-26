@@ -18,7 +18,7 @@ const onSelectTab = (key: string) => {
       <button
         v-for="tab in tabs"
         :key="tab.key"
-        class="border-none px-8 py-4 bg-transparent text-white cursor-pointer uppercase"
+        class="border-none px-8 py-4 bg-transparent text-gray-300 cursor-pointer uppercase"
         :class="{
           'border-solid border-0 border-b-1 border-blue-500 text-blue-500 font-bold':
             currentTab === tab.key,

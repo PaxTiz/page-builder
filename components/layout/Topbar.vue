@@ -62,16 +62,16 @@ onMounted(() => {
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-4 ml-4">
         <div>
-          <span class="text-white text-sm font-bold">Page name :</span>
+          <span class="text-gray-300 text-sm font-bold">Page name :</span>
           <input
             type="text"
-            class="bg-transparent text-white border-none focus:outline-none p-2"
+            class="bg-transparent text-gray-300 border-none focus:outline-none p-2"
             value="My new page"
             oninput="this.style.width = `${this.value.length}ch`"
           />
         </div>
         <div>
-          <span class="text-white text-sm font-bold">Page URL :</span>
+          <span class="text-gray-300 text-sm font-bold">Page URL :</span>
           <input
             type="text"
             class="bg-transparent text-gray border-none focus:outline-none p-2 pr-0"
@@ -80,7 +80,7 @@ onMounted(() => {
           />
           <input
             type="text"
-            class="bg-transparent text-white border-none focus:outline-none p-2 pl-0 -ml-1"
+            class="bg-transparent text-gray-300 border-none focus:outline-none p-2 pl-0 -ml-1"
             value="my-new-page"
             oninput="this.style.width = `${this.value.length}ch`"
           />

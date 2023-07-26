@@ -26,7 +26,7 @@ const tabs = [
       <div
         class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
       >
-        <h2 class="text-white m-0">Page History</h2>
+        <h2 class="text-gray-300 m-0">Page History</h2>
       </div>
 
       <div class="bg-gray-900 rounded-b">

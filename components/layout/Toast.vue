@@ -8,7 +8,7 @@ const { toast } = useToast();
     class="toast fixed bottom-4 w-full flex justify-center items-center"
   >
     <div
-      class="flex items-center gap-2 bg-gray-900 shadow-white text-white text-sm px-4 py-2 rounded-lg"
+      class="flex items-center gap-2 bg-gray-900 shadow-white text-gray-300 text-sm px-4 py-2 rounded-lg"
     >
       <div class="indicator" :class="toast.type">
         <svg

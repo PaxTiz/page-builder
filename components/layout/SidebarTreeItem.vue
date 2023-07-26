@@ -46,7 +46,7 @@ const { remove } = useBlocks();
       </template>
       <div style="width: 24px" v-else></div>
 
-      <span class="text-white">{{ block.name }}</span>
+      <span class="text-gray-300">{{ block.name }}</span>
     </div>
 
     <div class="flex items-center gap-2">

@@ -37,11 +37,11 @@ const insertNewBlock = () => {
       <div
         class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
       >
-        <h2 class="text-white m-0">Blocks Library</h2>
+        <h2 class="text-gray-300 m-0">Blocks Library</h2>
 
         <input
           v-model="searchQuery"
-          class="px-4 py-2 text-white bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded"
+          class="px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded"
           type="text"
           placeholder="Search..."
         />
@@ -58,7 +58,7 @@ const insertNewBlock = () => {
             :class="{ 'bg-gray-800': selectedCategory === category.id }"
             @click="() => (selectedCategory = category.id)"
           >
-            <span class="text-white">{{ category.name }}</span>
+            <span class="text-gray-300">{{ category.name }}</span>
           </div>
         </div>
 
@@ -77,10 +77,10 @@ const insertNewBlock = () => {
                   "
                   @click="() => (selectedBlock = block.default.type)"
                 >
-                  <p class="text-white m-0">{{ block.name }}</p>
+                  <p class="text-gray-300 m-0">{{ block.name }}</p>
                 </div>
               </template>
-              <p class="text-white m-0" v-else>No blocks found.</p>
+              <p class="text-gray-300 m-0" v-else>No blocks found.</p>
             </div>
           </div>
 
