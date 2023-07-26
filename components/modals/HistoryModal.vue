@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-import { BlockHistoryAction } from "types";
 import Tabs from "~/components/layout/Tabs.vue";
+import { BlockHistoryAction, BlockHistoryItem } from "~/types";
 import Modal from "./Modal.vue";
 
 const emit = defineEmits<{
   (e: "close"): void;
 }>();
 
+const { setState } = useApplication();
 const { sorted } = usePageHistory();
 
 const tabs = [
@@ -37,6 +38,14 @@ const formattedAction = (action: BlockHistoryAction) => {
     default:
       return action;
   }
+};
+
+const onPreview = (item: BlockHistoryItem) => {
+  setState("preview", item.blocks);
+};
+
+const onRestore = (item: BlockHistoryItem) => {
+  emit("close");
 };
 </script>
 
@@ -70,10 +79,16 @@ const formattedAction = (action: BlockHistoryAction) => {
                 <td class="capitalize">
                   {{ formattedAction(history.action) }}
                 </td>
-                <td>
+                <td class="flex gap-2">
+                  <button
+                    class="button-gray button-small"
+                    @click="() => onPreview(history)"
+                  >
+                    Preview
+                  </button>
                   <button
                     class="button-blue button-small"
-                    @click="emit('close')"
+                    @click="() => onRestore(history)"
                   >
                     Restore
                   </button>
