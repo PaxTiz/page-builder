@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { BlockHistoryAction } from "types";
 import Tabs from "~/components/layout/Tabs.vue";
 
 const emit = defineEmits<{
@@ -17,11 +18,30 @@ const tabs = [
     title: "Remote versions",
   },
 ];
+
+const formattedAction = (action: BlockHistoryAction) => {
+  switch (action) {
+    case "automatic":
+      return "Auto Save";
+    case "save":
+      return "Manual Save";
+    case "publish":
+      return "Publish";
+    case "addBlock":
+      return "Add Block";
+    case "deleteBlock":
+      return "Delete Block";
+    case "moveBlock":
+      return "Move Block";
+    default:
+      return action;
+  }
+};
 </script>
 
 <template>
   <div class="modal-wrapper fixed w-full h-full top-0 left-0">
-    <div class="w-2/5 bg-gray-900 shadow-white rounded">
+    <div class="w-3/5 bg-gray-900 shadow-white rounded">
       <div
         class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
       >
@@ -29,7 +49,7 @@ const tabs = [
       </div>
 
       <div class="bg-gray-900 rounded-b">
-        <div class="h-70 overflow-scroll">
+        <div class="h-90 overflow-scroll">
           <Tabs :tabs="tabs">
             <template #local>
               <table
@@ -40,6 +60,7 @@ const tabs = [
                     <th>#</th>
                     <th>Saved At</th>
                     <th>Save Mode</th>
+                    <th>Action</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -49,6 +70,9 @@ const tabs = [
                     <td>{{ history.id }}</td>
                     <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
                     <td class="capitalize">{{ history.saveMode }}</td>
+                    <td class="capitalize">
+                      {{ formattedAction(history.action) }}
+                    </td>
                     <td>
                       <button
                         class="button-blue button-small"

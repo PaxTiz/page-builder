@@ -43,7 +43,8 @@ const findContainingArray = (
 
 export const useBlocks = () => {
   const blocksState: Ref<Array<Block>> = useState("blocks", () => []);
-  const { undo, canUndo } = useRefHistory(blocksState);
+  const { undo: undoAction, canUndo } = useRefHistory(blocksState);
+  const { save } = usePageHistory();
 
   const add = (block: Block) => {
     blocksState.value = [
@@ -53,6 +54,14 @@ export const useBlocks = () => {
         id: nanoid(),
       },
     ];
+
+    save({
+      id: nanoid(),
+      action: "addBlock",
+      blocks: blocksState.value,
+      saveMode: "automatic",
+      timestamp: new Date().getTime(),
+    });
   };
 
   const setBlocks = (blocks: Array<Block>) => {
@@ -61,6 +70,25 @@ export const useBlocks = () => {
 
   const remove = (blockId: string) => {
     blocksState.value = deleteBlock(blocksState.value, blockId);
+
+    save({
+      id: nanoid(),
+      action: "deleteBlock",
+      blocks: blocksState.value,
+      saveMode: "automatic",
+      timestamp: new Date().getTime(),
+    });
+  };
+
+  const undo = () => {
+    undoAction();
+    save({
+      id: nanoid(),
+      action: "undo",
+      blocks: blocksState.value,
+      saveMode: "automatic",
+      timestamp: new Date().getTime(),
+    });
   };
 
   return {
