@@ -11,19 +11,24 @@ const { isActive: isHistoryModalActive, toggle: toggleHistoryModal } =
 const { blocks } = useBlocks();
 const storage: Ref<BlockHistory> = useSessionStorage("blocks_history", []);
 
-const onSave = () => {
-  storage.value = [];
+const onSave = (mode?: "manual" | "automatic") => {
   storage.value.push({
     id: nanoid(10),
     timestamp: new Date().getTime(),
     blocks: blocks.value,
-    saveMode: "automatic",
+    saveMode: mode ?? "manual",
   });
 };
 
 const onPublish = () => {
-  onSave();
+  onSave("manual");
 };
+
+onMounted(() => {
+  setInterval(() => {
+    onSave("automatic");
+  }, 1000 * 60);
+});
 </script>
 
 <template>
@@ -81,7 +86,7 @@ const onPublish = () => {
           <span>history</span>
         </button>
 
-        <button class="button-blue" @click="onSave">
+        <button class="button-blue" @click="() => onSave()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
               d="M7 19V13H17V19H19V7.82843L16.1716 5H5V19H7ZM4 3H17L21 7V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM9 15V19H15V15H9Z"
