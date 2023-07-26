@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="__block container">
+  <div class="__block container mx-auto">
     <PageRenderer :children="children" />
   </div>
 </template>
