@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { BlockHistoryAction } from "types";
 import Tabs from "~/components/layout/Tabs.vue";
+import Modal from "./Modal.vue";
 
 const emit = defineEmits<{
   (e: "close"): void;
@@ -40,74 +41,53 @@ const formattedAction = (action: BlockHistoryAction) => {
 </script>
 
 <template>
-  <div class="modal-wrapper fixed w-full h-full top-0 left-0">
-    <div class="w-3/5 bg-gray-900 shadow-white rounded">
-      <div
-        class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
-      >
-        <h2 class="text-gray-300 m-0">Page History</h2>
-      </div>
+  <Modal title="Page History">
+    <template #footer>
+      <button class="button-red" @click="emit('close')">close</button>
+    </template>
 
-      <div class="bg-gray-900 rounded-b">
-        <div class="h-90 overflow-scroll">
-          <Tabs :tabs="tabs">
-            <template #local>
-              <table
-                class="border-collapse w-full text-sm text-left text-gray-400 shadow-white rounded"
-              >
-                <thead class="text-xs uppercase bg-gray-700 text-gray-400">
-                  <tr>
-                    <th>#</th>
-                    <th>Saved At</th>
-                    <th>Save Mode</th>
-                    <th>Action</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
+    <div class="h-90 overflow-scroll">
+      <Tabs :tabs="tabs">
+        <template #local>
+          <table
+            class="border-collapse w-full text-sm text-left text-gray-400 shadow-white rounded"
+          >
+            <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+              <tr>
+                <th>#</th>
+                <th>Saved At</th>
+                <th>Save Mode</th>
+                <th>Action</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-                <tbody>
-                  <tr v-for="history in sorted" :key="history.timestamp">
-                    <td>{{ history.id }}</td>
-                    <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
-                    <td class="capitalize">{{ history.saveMode }}</td>
-                    <td class="capitalize">
-                      {{ formattedAction(history.action) }}
-                    </td>
-                    <td>
-                      <button
-                        class="button-blue button-small"
-                        @click="emit('close')"
-                      >
-                        Restore
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </template>
-          </Tabs>
-        </div>
-
-        <div
-          class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-gray-700"
-        >
-          <button class="button-red" @click="emit('close')">close</button>
-        </div>
-      </div>
+            <tbody>
+              <tr v-for="history in sorted" :key="history.timestamp">
+                <td>{{ history.id }}</td>
+                <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
+                <td class="capitalize">{{ history.saveMode }}</td>
+                <td class="capitalize">
+                  {{ formattedAction(history.action) }}
+                </td>
+                <td>
+                  <button
+                    class="button-blue button-small"
+                    @click="emit('close')"
+                  >
+                    Restore
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </template>
+      </Tabs>
     </div>
-  </div>
+  </Modal>
 </template>
 
 <style lang="scss" scoped>
-.modal-wrapper {
-  z-index: 150;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(1px);
-}
-
 table {
   th {
     @apply px-4 py-2;
