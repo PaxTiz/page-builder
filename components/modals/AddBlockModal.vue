@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import categories from "~/constants/block_categories";
 import allBlocks from "~/constants/blocks";
+import Modal from "./Modal.vue";
 
 const emit = defineEmits<{
   (e: "close"): void;
@@ -32,88 +33,56 @@ const insertNewBlock = () => {
 </script>
 
 <template>
-  <div class="modal-wrapper fixed w-full h-full top-0 left-0">
-    <div class="bg-gray-900 shadow-white rounded">
+  <Modal title="Blocks Library">
+    <template #header>
+      <input
+        v-model="searchQuery"
+        class="px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded"
+        type="text"
+        placeholder="Search..."
+      />
+    </template>
+
+    <template #sidebar>
       <div
-        class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
+        class="overflow-scroll flex flex-col border-solid border-0 border-r border-gray-700"
       >
-        <h2 class="text-gray-300 m-0">Blocks Library</h2>
-
-        <input
-          v-model="searchQuery"
-          class="px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded"
-          type="text"
-          placeholder="Search..."
-        />
-      </div>
-
-      <div class="library bg-gray-900 rounded-b">
         <div
-          class="overflow-scroll flex flex-col border-solid border-0 border-r border-gray-700"
+          v-for="category in categories"
+          :key="category.id"
+          class="px-4 py-2 cursor-pointer hover:bg-gray-800"
+          :class="{ 'bg-gray-800': selectedCategory === category.id }"
+          @click="() => (selectedCategory = category.id)"
         >
-          <div
-            v-for="category in categories"
-            :key="category.id"
-            class="px-4 py-2 cursor-pointer hover:bg-gray-800"
-            :class="{ 'bg-gray-800': selectedCategory === category.id }"
-            @click="() => (selectedCategory = category.id)"
-          >
-            <span class="text-gray-300">{{ category.name }}</span>
-          </div>
+          <span class="text-gray-300">{{ category.name }}</span>
         </div>
+      </div>
+    </template>
 
-        <div>
-          <div class="h-70 overflow-scroll p-8">
-            <div class="grid grid-cols-3 gap-4">
-              <template v-if="blocks.length > 1">
-                <div
-                  v-for="block in blocks"
-                  :key="block.default.type"
-                  class="px-4 py-3 border rounded cursor-pointer transition-colors duration-100"
-                  :class="
-                    selectedBlock === block.default.type
-                      ? 'border-dashed border-blue'
-                      : 'border-solid border-gray bg-gray-800'
-                  "
-                  @click="() => (selectedBlock = block.default.type)"
-                >
-                  <p class="text-gray-300 m-0">{{ block.name }}</p>
-                </div>
-              </template>
-              <p class="text-gray-300 m-0" v-else>No blocks found.</p>
-            </div>
-          </div>
+    <template #footer>
+      <button class="button-red" @click="$emit('close')">Cancel</button>
+      <button class="button-blue" @click="insertNewBlock">Add block</button>
+    </template>
 
+    <div class="h-70 overflow-scroll p-8">
+      <div class="grid grid-cols-3 gap-4">
+        <template v-if="blocks.length > 1">
           <div
-            class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-gray-700"
+            v-for="block in blocks"
+            :key="block.default.type"
+            class="px-4 py-3 border rounded cursor-pointer transition-colors duration-100"
+            :class="
+              selectedBlock === block.default.type
+                ? 'border-dashed border-blue'
+                : 'border-solid border-gray bg-gray-800'
+            "
+            @click="() => (selectedBlock = block.default.type)"
           >
-            <button class="button-red" @click="emit('close')">Cancel</button>
-            <button
-              class="button-blue"
-              :disabled="selectedBlock === null"
-              @click="insertNewBlock"
-            >
-              Add block
-            </button>
+            <p class="text-gray-300 m-0">{{ block.name }}</p>
           </div>
-        </div>
+        </template>
+        <p class="text-gray-300 m-0" v-else>No blocks found.</p>
       </div>
     </div>
-  </div>
+  </Modal>
 </template>
-
-<style lang="scss" scoped>
-.modal-wrapper {
-  z-index: 150;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(1px);
-}
-
-.library {
-  display: grid;
-  grid-template-columns: 200px 490px;
-}
-</style>
