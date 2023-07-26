@@ -10,7 +10,10 @@ export default defineConfig({
     [
       /^button-(.*)$/,
       ([, c]) =>
-        `border-none rounded text-white bg-${c}-700 hover:bg-${c}-600 disabled:bg-${c}-400 transition-colors duration-300 font-bold uppercase px-4 py-2 cursor-pointer`,
+        `border-none rounded text-white bg-${c}-700 hover:bg-${c}-600 disabled:bg-${c}-400 transition-colors duration-300 font-bold uppercase px-4 flex items-center gap-2 h-[32px] cursor-pointer`,
     ],
+    {
+      "button-small": "text-xs px-2 h-[24px]",
+    },
   ],
 });
