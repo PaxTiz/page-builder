@@ -4,6 +4,7 @@ import AddBlockModal from "~/components/modals/AddBlockModal.vue";
 import HistoryModal from "~/components/modals/HistoryModal.vue";
 import { BlockHistory } from "~/types";
 
+const { set } = useToast();
 const { isActive, toggle } = useModal("modal_add_block");
 const { isActive: isHistoryModalActive, toggle: toggleHistoryModal } =
   useModal("modal_history");
@@ -12,11 +13,24 @@ const { blocks } = useBlocks();
 const storage: Ref<BlockHistory> = useSessionStorage("blocks_history", []);
 
 const onSave = (mode?: "manual" | "automatic") => {
+  if (!mode) {
+    mode = "manual";
+  }
+
   storage.value.push({
     id: nanoid(10),
     timestamp: new Date().getTime(),
     blocks: blocks.value,
-    saveMode: mode ?? "manual",
+    saveMode: mode,
+  });
+
+  set({
+    type: "success",
+    duration: mode === "manual" ? 2000 : 1000,
+    message:
+      mode === "manual"
+        ? "The page has been saved!"
+        : "The page has been auto-saved!",
   });
 };
 

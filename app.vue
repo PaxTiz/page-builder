@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { nanoid } from "nanoid";
 import Sidebar from "~/components/layout/Sidebar.vue";
+import Toast from "~/components/layout/Toast.vue";
 import Topbar from "~/components/layout/Topbar.vue";
 import PageRenderer from "~/components/page/PageRenderer.vue";
 
@@ -103,6 +104,8 @@ setBlocks([
 
 <template>
   <div class="bg-gray-800">
+    <Toast />
+
     <Sidebar :children="blocks" />
     <Topbar />
 

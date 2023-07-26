@@ -46,10 +46,7 @@ const tabs = [
                 </thead>
 
                 <tbody>
-                  <tr
-                    v-for="history in storage.reverse()"
-                    :key="history.timestamp"
-                  >
+                  <tr v-for="history in storage" :key="history.timestamp">
                     <td>{{ history.id }}</td>
                     <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
                     <td class="capitalize">{{ history.saveMode }}</td>
