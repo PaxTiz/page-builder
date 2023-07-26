@@ -12,6 +12,8 @@ const { isActive: isHistoryModalActive, toggle: toggleHistoryModal } =
 const { blocks } = useBlocks();
 const { save } = usePageHistory();
 
+const saveInterval: Ref<NodeJS.Timer | undefined> = ref();
+
 const onSave = (action: BlockHistoryAction, mode?: BlockHistorySaveMode) => {
   if (!mode) {
     mode = "manual";
@@ -40,9 +42,14 @@ const onPublish = () => {
 };
 
 onMounted(() => {
-  setInterval(() => {
+  saveInterval.value = setInterval(() => {
     onSave("automatic", "automatic");
   }, 1000 * 60);
+});
+
+onBeforeUnmount(() => {
+  clearInterval(saveInterval.value);
+  saveInterval.value = undefined;
 });
 </script>
 
