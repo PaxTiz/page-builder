@@ -2,7 +2,6 @@
 import { nanoid } from "nanoid";
 import AddBlockModal from "~/components/modals/AddBlockModal.vue";
 import HistoryModal from "~/components/modals/HistoryModal.vue";
-import { BlockHistory } from "~/types";
 
 const { set } = useToast();
 const { isActive, toggle } = useModal("modal_add_block");
@@ -10,14 +9,14 @@ const { isActive: isHistoryModalActive, toggle: toggleHistoryModal } =
   useModal("modal_history");
 
 const { blocks } = useBlocks();
-const storage: Ref<BlockHistory> = useSessionStorage("blocks_history", []);
+const { save } = usePageHistory();
 
 const onSave = (mode?: "manual" | "automatic") => {
   if (!mode) {
     mode = "manual";
   }
 
-  storage.value.push({
+  save({
     id: nanoid(10),
     timestamp: new Date().getTime(),
     blocks: blocks.value,

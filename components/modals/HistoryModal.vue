@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import Tabs from "~/components/layout/Tabs.vue";
-import { BlockHistory } from "~/types";
 
 const emit = defineEmits<{
   (e: "close"): void;
 }>();
 
-const storage: Ref<BlockHistory> = useSessionStorage("blocks_history", []);
+const { sorted } = usePageHistory();
 
 const tabs = [
   {
@@ -46,7 +45,7 @@ const tabs = [
                 </thead>
 
                 <tbody>
-                  <tr v-for="history in storage" :key="history.timestamp">
+                  <tr v-for="history in sorted" :key="history.timestamp">
                     <td>{{ history.id }}</td>
                     <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
                     <td class="capitalize">{{ history.saveMode }}</td>
