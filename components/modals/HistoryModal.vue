@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Pagination from "~/components/layout/Pagination.vue";
 import Tabs from "~/components/layout/Tabs.vue";
 import { BlockHistoryAction, BlockHistoryItem } from "~/types";
 import Modal from "./Modal.vue";
@@ -9,6 +10,13 @@ const emit = defineEmits<{
 
 const { setState } = useApplication();
 const { sorted } = usePageHistory();
+const page = ref(1);
+
+const paginatedHistory = computed(() => {
+  const start = page.value === 1 ? 0 : (page.value - 1) * 5;
+  const end = page.value === 1 ? 5 : page.value * 5;
+  return sorted.value.slice(start, end);
+});
 
 const tabs = [
   {
@@ -55,47 +63,59 @@ const onRestore = (item: BlockHistoryItem) => {
       <button class="button-red" @click="emit('close')">close</button>
     </template>
 
-    <div class="h-90 overflow-scroll">
+    <div class="h-98 overflow-scroll">
       <Tabs :tabs="tabs">
         <template #local>
-          <table
-            class="border-collapse w-full text-sm text-left text-gray-400 shadow-white rounded"
-          >
-            <thead class="text-xs uppercase bg-gray-700 text-gray-400">
-              <tr>
-                <th>#</th>
-                <th>Saved At</th>
-                <th>Save Mode</th>
-                <th>Action</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
+          <div class="w-200">
+            <table
+              class="border-collapse w-full text-sm text-left text-gray-400 shadow-white rounded"
+            >
+              <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+                <tr>
+                  <th>#</th>
+                  <th>Saved At</th>
+                  <th>Save Mode</th>
+                  <th>Action</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr v-for="history in sorted" :key="history.timestamp">
-                <td>{{ history.id }}</td>
-                <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
-                <td class="capitalize">{{ history.saveMode }}</td>
-                <td class="capitalize">
-                  {{ formattedAction(history.action) }}
-                </td>
-                <td class="flex gap-2">
-                  <button
-                    class="button-gray button-small"
-                    @click="() => onPreview(history)"
-                  >
-                    Preview
-                  </button>
-                  <button
-                    class="button-blue button-small"
-                    @click="() => onRestore(history)"
-                  >
-                    Restore
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody>
+                <tr
+                  v-for="history in paginatedHistory"
+                  :key="history.timestamp"
+                >
+                  <td>{{ history.id }}</td>
+                  <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
+                  <td class="capitalize">{{ history.saveMode }}</td>
+                  <td class="capitalize">
+                    {{ formattedAction(history.action) }}
+                  </td>
+                  <td class="flex gap-2">
+                    <button
+                      class="button-gray button-small"
+                      @click="() => onPreview(history)"
+                    >
+                      Preview
+                    </button>
+                    <button
+                      class="button-blue button-small"
+                      @click="() => onRestore(history)"
+                    >
+                      Restore
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="mt-4">
+              <Pagination
+                v-model="page"
+                :total="Math.floor(sorted.length / 5)"
+              />
+            </div>
+          </div>
         </template>
       </Tabs>
     </div>

@@ -52,7 +52,7 @@ const addHistoryItem = (
   blocks: Array<Block>
 ) => {
   method({
-    id: nanoid(),
+    id: nanoid(10),
     action: action,
     blocks: blocks,
     saveMode: "automatic",
