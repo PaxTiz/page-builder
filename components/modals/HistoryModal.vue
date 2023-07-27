@@ -66,16 +66,15 @@ const onRestore = (item: BlockHistoryItem) => {
     <div class="h-98 overflow-scroll">
       <Tabs :tabs="tabs">
         <template #local>
-          <div class="w-200">
+          <div class="w-140">
             <table
               class="border-collapse w-full text-sm text-left text-gray-400 shadow-white rounded"
             >
               <thead class="text-xs uppercase bg-gray-700 text-gray-400">
                 <tr>
-                  <th>#</th>
+                  <th>Action</th>
                   <th>Saved At</th>
                   <th>Save Mode</th>
-                  <th>Action</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -85,12 +84,11 @@ const onRestore = (item: BlockHistoryItem) => {
                   v-for="history in paginatedHistory"
                   :key="history.timestamp"
                 >
-                  <td>{{ history.id }}</td>
-                  <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
-                  <td class="capitalize">{{ history.saveMode }}</td>
                   <td class="capitalize">
                     {{ formattedAction(history.action) }}
                   </td>
+                  <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
+                  <td class="capitalize">{{ history.saveMode }}</td>
                   <td class="flex gap-2">
                     <button
                       class="button-gray button-small"
