@@ -1,17 +1,16 @@
 <script lang="ts" setup>
 import { Block } from "~/types";
-
 import SidebarTree from "./SidebarTree.vue";
 
-const props = defineProps<{
+defineProps<{
   children: Array<Block>;
 }>();
 
-const { canUndo, undo, setBlocks } = useBlocks();
+const { canUndo, undo, move } = useBlocks();
 
-const childrenTree = toRef(props, "children");
-
-watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
+const onMove = (blocks: Array<Block>) => {
+  move(blocks);
+};
 </script>
 
 <template>
@@ -19,7 +18,7 @@ watch(childrenTree, (newBlocks) => setBlocks(newBlocks));
     class="sidebar fixed h-screen overflow-scroll bg-gray-900 shadow-white z-10"
   >
     <div class="mt-16 mb-8">
-      <SidebarTree v-model="childrenTree" />
+      <SidebarTree :model-value="children" @update:modelValue="onMove" />
     </div>
 
     <div

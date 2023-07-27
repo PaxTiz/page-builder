@@ -4,12 +4,16 @@ import "@he-tree/vue/style/default.css";
 import { Block, isContainerBlock } from "~/types";
 import SidebarTreeItem from "./SidebarTreeItem.vue";
 
-defineEmits<{
-  (e: "update:modelValue"): void;
+const emit = defineEmits<{
+  (e: "update:modelValue", blocks: Array<Block>): void;
 }>();
 defineProps<{
   modelValue: Array<Block>;
 }>();
+
+const onMove = (blocks: Array<Block>) => {
+  emit("update:modelValue", blocks);
+};
 </script>
 
 <template>
@@ -18,7 +22,7 @@ defineProps<{
       :watermark="false"
       :model-value="modelValue"
       :each-droppable="(stat) => isContainerBlock(stat.data)"
-      @update:modelValue="(value) => $emit('update:modelValue', value)"
+      @update:modelValue="onMove"
     >
       <template #default="{ node, stat }">
         <SidebarTreeItem

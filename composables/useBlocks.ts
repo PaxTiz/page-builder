@@ -80,6 +80,17 @@ export const useBlocks = () => {
     });
   };
 
+  const move = (blocks: Array<Block>) => {
+    blocksState.value = blocks;
+    save({
+      id: nanoid(),
+      action: "moveBlock",
+      blocks: blocksState.value,
+      saveMode: "automatic",
+      timestamp: new Date().getTime(),
+    });
+  };
+
   const undo = () => {
     undoAction();
     save({
@@ -96,6 +107,7 @@ export const useBlocks = () => {
     setBlocks,
     add,
     remove,
+    move,
     canUndo,
     undo,
   };
