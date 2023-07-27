@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Block } from "~/types";
+import BlockEditor from "./BlockEditor.vue";
 import OverlayButton from "./OverlayButton.vue";
 import SidebarTree from "./SidebarTree.vue";
 
@@ -7,6 +8,7 @@ defineProps<{
   children: Array<Block>;
 }>();
 
+const { element } = useSidebar();
 const { canUndo, undo, move } = useBlocks();
 
 const onMove = (blocks: Array<Block>) => {

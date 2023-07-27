@@ -1,64 +1,5 @@
 import { nanoid } from "nanoid";
-import {
-  Block,
-  BlockHistoryAction,
-  BlockHistoryItem,
-  isContainerBlock,
-} from "~/types";
-
-const deleteBlock = (array: Array<Block>, blockId: string): Array<Block> => {
-  return array
-    .filter((e) => e.id !== blockId)
-    .map((object) => {
-      if (isContainerBlock(object)) {
-        return {
-          ...object,
-          children: deleteBlock(object.children, blockId),
-        };
-      }
-
-      return object;
-    });
-};
-
-const findContainingArray = (
-  blocks: Array<Block>,
-  blockId: string,
-  indexes: Array<number>
-): { blocks: Array<Block>; indexes: Array<number> } | undefined => {
-  const index = blocks.findIndex((e) => e.id === blockId);
-  if (index === -1) {
-    for (const block of blocks) {
-      if (isContainerBlock(block)) {
-        const result = findContainingArray(block.children, blockId, indexes);
-        if (result) {
-          const blockIndex = blocks.findIndex((e) => e.id === block.id);
-          result.indexes.push(blockIndex);
-          return result;
-        }
-      }
-    }
-
-    return undefined;
-  }
-
-  indexes.push(index);
-  return { blocks, indexes };
-};
-
-const addHistoryItem = (
-  method: (item: BlockHistoryItem) => void,
-  action: BlockHistoryAction,
-  blocks: Array<Block>
-) => {
-  method({
-    id: nanoid(10),
-    action: action,
-    blocks: blocks,
-    saveMode: "automatic",
-    timestamp: new Date().getTime(),
-  });
-};
+import { Block } from "~/types";
 
 export const useBlocks = () => {
   const blocksState: Ref<Array<Block>> = useState("blocks", () => []);
@@ -91,6 +32,10 @@ export const useBlocks = () => {
     addHistoryItem(save, "moveBlock", blocksState.value);
   };
 
+  const update = (block: Block) => {
+    blocksState.value = updateBlock(blocksState.value, block);
+  };
+
   const undo = () => {
     undoAction();
     addHistoryItem(save, "undo", blocksState.value);
@@ -102,6 +47,7 @@ export const useBlocks = () => {
     add,
     remove,
     move,
+    update,
     canUndo,
     undo,
   };

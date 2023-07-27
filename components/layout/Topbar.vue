@@ -15,6 +15,17 @@ const { save } = usePageHistory();
 const saveInterval: Ref<NodeJS.Timer | undefined> = ref();
 
 const onSave = (action: BlockHistoryAction, mode?: BlockHistorySaveMode) => {
+  /**
+   * TODO: Validate blocks before saving on backend
+   *
+   * A validation before saving is required to avoid broken blocks
+   * in case the user has saved or restored invalid configuration.
+   *
+   * For example, it can happens if the user refresh the page without
+   * saving after editing a block but is invalid, and restore it from
+   * it's local history.
+   */
+
   if (!mode) {
     mode = "manual";
   }

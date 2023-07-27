@@ -13,3 +13,47 @@ body {
   outline: 2px solid red;
   @apply rounded;
 }
+
+.builder {
+  .form-group {
+    @apply block text-sm text-gray-300 mb-4;
+
+    &.inline {
+      > div {
+        display: flex;
+        gap: 1em;
+      }
+
+      input {
+        width: fit-content;
+        margin-top: 0;
+      }
+
+      span {
+        display: block;
+        margin-top: 8px;
+      }
+    }
+
+    &.error {
+      span {
+        @apply block text-red mt-2;
+      }
+
+      input,
+      select {
+        @apply border-red;
+      }
+    }
+  }
+
+  input,
+  select {
+    margin-top: 8px;
+    @apply w-full px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded;
+  }
+
+  ::file-selector-button {
+    @apply bg-gray-700 border-none text-xs text-gray-300 px-2 py-1 rounded cursor-pointer;
+  }
+}

@@ -21,6 +21,7 @@
   "dependencies": {
     "@he-tree/vue": "^2.4.2",
     "nanoid": "^4.0.2",
-    "nuxt-swiper": "^1.2.0"
+    "nuxt-swiper": "^1.2.0",
+    "zod": "^3.21.4"
   }
 }

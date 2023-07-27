@@ -23,6 +23,7 @@ setBlocks([
         name: "Button",
         text: "Contact me",
         url: "https://google.fr",
+        target: "_self",
       },
       {
         id: nanoid(),
