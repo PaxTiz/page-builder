@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Block } from "~/types";
+import OverlayButton from "./OverlayButton.vue";
 import SidebarTree from "./SidebarTree.vue";
 
 defineProps<{
@@ -17,18 +18,16 @@ const onMove = (blocks: Array<Block>) => {
   <div
     class="sidebar fixed h-screen overflow-scroll bg-gray-900 shadow-white z-10"
   >
-    <div class="mt-16 mb-8">
-      <SidebarTree :model-value="children" @update:modelValue="onMove" />
+    <div v-if="element" class="mt-16 mb-8">
+      <BlockEditor :block="element" />
     </div>
 
-    <div
-      v-if="canUndo"
-      class="undo fixed flex items-center justify-center bottom-4 left-0 w-full"
-    >
-      <div
-        class="flex items-center gap-2 bg-black hover:opacity-80 transition-all duration-300 text-gray-300 text-xs rounded-3xl px-8 py-2 cursor-pointer select-none"
-        @click="() => undo()"
-      >
+    <template v-else>
+      <div class="mt-16 mb-8">
+        <SidebarTree :model-value="children" @update:modelValue="onMove" />
+      </div>
+
+      <OverlayButton v-if="canUndo" text="Undo" @click="() => undo()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -39,19 +38,13 @@ const onMove = (blocks: Array<Block>) => {
             fill="#fff"
           ></path>
         </svg>
-        <span>Undo</span>
-      </div>
-    </div>
+      </OverlayButton>
+    </template>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.sidebar,
-.undo {
+.sidebar {
   width: 350px;
-
-  button {
-    @apply border-none cursor-pointer;
-  }
 }
 </style>
