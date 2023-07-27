@@ -1,5 +1,10 @@
 import { nanoid } from "nanoid";
-import { Block, isContainerBlock } from "~/types";
+import {
+  Block,
+  BlockHistoryAction,
+  BlockHistoryItem,
+  isContainerBlock,
+} from "~/types";
 
 const deleteBlock = (array: Array<Block>, blockId: string): Array<Block> => {
   return array
@@ -41,6 +46,20 @@ const findContainingArray = (
   return { blocks, indexes };
 };
 
+const addHistoryItem = (
+  method: (item: BlockHistoryItem) => void,
+  action: BlockHistoryAction,
+  blocks: Array<Block>
+) => {
+  method({
+    id: nanoid(),
+    action: action,
+    blocks: blocks,
+    saveMode: "automatic",
+    timestamp: new Date().getTime(),
+  });
+};
+
 export const useBlocks = () => {
   const blocksState: Ref<Array<Block>> = useState("blocks", () => []);
   const { undo: undoAction, canUndo } = useRefHistory(blocksState);
@@ -55,13 +74,7 @@ export const useBlocks = () => {
       },
     ];
 
-    save({
-      id: nanoid(),
-      action: "addBlock",
-      blocks: blocksState.value,
-      saveMode: "automatic",
-      timestamp: new Date().getTime(),
-    });
+    addHistoryItem(save, "addBlock", blocksState.value);
   };
 
   const setBlocks = (blocks: Array<Block>) => {
@@ -70,36 +83,17 @@ export const useBlocks = () => {
 
   const remove = (blockId: string) => {
     blocksState.value = deleteBlock(blocksState.value, blockId);
-
-    save({
-      id: nanoid(),
-      action: "deleteBlock",
-      blocks: blocksState.value,
-      saveMode: "automatic",
-      timestamp: new Date().getTime(),
-    });
+    addHistoryItem(save, "deleteBlock", blocksState.value);
   };
 
   const move = (blocks: Array<Block>) => {
     blocksState.value = blocks;
-    save({
-      id: nanoid(),
-      action: "moveBlock",
-      blocks: blocksState.value,
-      saveMode: "automatic",
-      timestamp: new Date().getTime(),
-    });
+    addHistoryItem(save, "moveBlock", blocksState.value);
   };
 
   const undo = () => {
     undoAction();
-    save({
-      id: nanoid(),
-      action: "undo",
-      blocks: blocksState.value,
-      saveMode: "automatic",
-      timestamp: new Date().getTime(),
-    });
+    addHistoryItem(save, "undo", blocksState.value);
   };
 
   return {
