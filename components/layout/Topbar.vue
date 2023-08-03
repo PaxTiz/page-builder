@@ -2,7 +2,7 @@
 import { nanoid } from "nanoid";
 import AddBlockModal from "~/components/modals/AddBlockModal.vue";
 import HistoryModal from "~/components/modals/HistoryModal.vue";
-import { BlockHistoryAction, BlockHistorySaveMode } from "~/types";
+import { BlockHistoryAction } from "~/types";
 
 const { set } = useToast();
 const { isActive, toggle } = useModal("modal_add_block");
@@ -14,7 +14,7 @@ const { save } = usePageHistory();
 
 const saveInterval: Ref<NodeJS.Timer | undefined> = ref();
 
-const onSave = (action: BlockHistoryAction, mode?: BlockHistorySaveMode) => {
+const onSave = (action: BlockHistoryAction, manualSave = true) => {
   /**
    * TODO: Validate blocks before saving on backend
    *
@@ -26,35 +26,29 @@ const onSave = (action: BlockHistoryAction, mode?: BlockHistorySaveMode) => {
    * it's local history.
    */
 
-  if (!mode) {
-    mode = "manual";
-  }
-
   save({
     id: nanoid(10),
     timestamp: new Date().getTime(),
     blocks: blocks.value,
     action,
-    saveMode: mode,
   });
 
   set({
     type: "success",
-    duration: mode === "manual" ? 2000 : 1000,
-    message:
-      mode === "manual"
-        ? "The page has been saved!"
-        : "The page has been auto-saved!",
+    duration: manualSave ? 2000 : 1000,
+    message: manualSave
+      ? "The page has been saved!"
+      : "The page has been auto-saved!",
   });
 };
 
 const onPublish = () => {
-  onSave("publish", "manual");
+  onSave("publish");
 };
 
 onMounted(() => {
   saveInterval.value = setInterval(() => {
-    onSave("automatic", "automatic");
+    onSave("automatic", false);
   }, 1000 * 60);
 });
 

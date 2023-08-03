@@ -53,7 +53,6 @@ export const addHistoryItem = (
     id: nanoid(10),
     action: action,
     blocks: blocks,
-    saveMode: "automatic",
     timestamp: new Date().getTime(),
   });
 };

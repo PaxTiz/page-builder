@@ -1,7 +1,5 @@
 import { Block } from "./blocks";
 
-export type BlockHistorySaveMode = "manual" | "automatic";
-
 export type BlockHistoryAction =
   | "automatic"
   | "save"
@@ -16,7 +14,6 @@ export type BlockHistoryItem = {
   timestamp: number;
   blocks: Array<Block>;
   action: BlockHistoryAction;
-  saveMode: BlockHistorySaveMode;
 };
 
 export type BlockHistory = Array<BlockHistoryItem>;

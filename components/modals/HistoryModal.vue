@@ -66,7 +66,7 @@ const onRestore = (item: BlockHistoryItem) => {
     <div class="h-98 overflow-scroll">
       <Tabs :tabs="tabs">
         <template #local>
-          <div class="w-140">
+          <div class="w-120">
             <table
               class="border-collapse w-full text-sm text-left text-gray-400 shadow-white rounded"
             >
@@ -74,7 +74,6 @@ const onRestore = (item: BlockHistoryItem) => {
                 <tr>
                   <th>Action</th>
                   <th>Saved At</th>
-                  <th>Save Mode</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -88,7 +87,6 @@ const onRestore = (item: BlockHistoryItem) => {
                     {{ formattedAction(history.action) }}
                   </td>
                   <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
-                  <td class="capitalize">{{ history.saveMode }}</td>
                   <td class="flex gap-2">
                     <button
                       class="button-gray button-small"
