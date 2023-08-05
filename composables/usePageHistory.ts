@@ -1,5 +1,9 @@
 import { BlockHistory, BlockHistoryItem } from '~/types';
 
+/**
+ * TODO: Refactor this to use IndexedDB instead of local storage
+ *       in order to avoid storage limit issues
+ */
 export const usePageHistory = () => {
   const history: Ref<BlockHistory> = useSessionStorage('blocks_history', []);
 

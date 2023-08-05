@@ -9,7 +9,7 @@ const { isActive, toggle } = useModal('modal_add_block');
 const { isActive: isHistoryModalActive, toggle: toggleHistoryModal } =
   useModal('modal_history');
 
-const { blocks } = useBlocks();
+const { page } = useBlocks();
 const { save } = usePageHistory();
 
 const saveInterval: Ref<NodeJS.Timer | undefined> = ref();
@@ -29,7 +29,7 @@ const onSave = (action: BlockHistoryAction, manualSave = true) => {
   save({
     id: nanoid(10),
     timestamp: new Date().getTime(),
-    blocks: blocks.value,
+    blocks: page.value.blocks,
     action,
   });
 

@@ -1,48 +1,82 @@
 import { nanoid } from 'nanoid';
+import { Page } from '~/server/schema';
 import { Block } from '~/types';
 
+type ActualPage = Page & { blocks: Array<Block> }
+
 export const useBlocks = () => {
-  const blocksState: Ref<Array<Block>> = useState('blocks', () => []);
-  const { undo: undoAction, canUndo } = useRefHistory(blocksState);
+  const page: Ref<ActualPage> = useState('page', () => ({
+    id: '',
+    name: '',
+    slug: '',
+    blocks: [],
+  }));
+
+  const { undo: undoAction, canUndo } = useRefHistory(page);
   const { save } = usePageHistory();
 
   const add = (block: Block) => {
-    blocksState.value = [
-      ...blocksState.value,
-      {
-        ...block,
-        id: nanoid(),
-      },
-    ];
+    page.value = {
+      ...page.value,
+      blocks: [
+        ...page.value.blocks,
+        {
+          ...block,
+          id: nanoid(),
+        },
 
-    addHistoryItem(save, 'addBlock', blocksState.value);
+      ],
+    };
+
+    addHistoryItem(save, 'addBlock', page.value.blocks);
   };
 
   const setBlocks = (blocks: Array<Block>) => {
-    blocksState.value = blocks;
+    page.value = {
+      ...page.value,
+      blocks,
+    };
   };
 
   const remove = (blockId: string) => {
-    blocksState.value = deleteBlock(blocksState.value, blockId);
-    addHistoryItem(save, 'deleteBlock', blocksState.value);
+    page.value = {
+      ...page.value,
+      blocks: deleteBlock(page.value.blocks, blockId),
+    };
+    addHistoryItem(save, 'deleteBlock', page.value.blocks);
   };
 
   const move = (blocks: Array<Block>) => {
-    blocksState.value = blocks;
-    addHistoryItem(save, 'moveBlock', blocksState.value);
+    page.value = {
+      ...page.value,
+      blocks,
+    };
+    addHistoryItem(save, 'moveBlock', page.value.blocks);
   };
 
   const update = (block: Block) => {
-    blocksState.value = updateBlock(blocksState.value, block);
+    page.value = {
+      ...page.value,
+      blocks: updateBlock(page.value.blocks, block),
+    };
   };
 
   const undo = () => {
     undoAction();
-    addHistoryItem(save, 'undo', blocksState.value);
+    addHistoryItem(save, 'undo', page.value.blocks);
+  };
+
+  const load = async (pageId: string) => {
+    const response = await useFetch(`/api/pages/${pageId}`);
+    if (response.error.value) {
+      throw createError(response.error.value);
+    }
+
+    page.value = response.data.value as ActualPage;
   };
 
   return {
-    blocks: blocksState,
+    page,
     setBlocks,
     add,
     remove,
@@ -50,5 +84,6 @@ export const useBlocks = () => {
     update,
     canUndo,
     undo,
+    load,
   };
 };
