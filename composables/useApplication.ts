@@ -1,7 +1,7 @@
-import { ApplicationState, Block } from "~/types";
+import { ApplicationState, Block } from '~/types';
 
 export const useApplication = () => {
-  const state = useState("application_state", () => "editor");
+  const state = useState('application_state', () => 'editor');
 
   const { setBlocks } = usePreview();
 

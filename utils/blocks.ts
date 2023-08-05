@@ -1,17 +1,17 @@
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
 import {
   Block,
   BlockHistoryAction,
   BlockHistoryItem,
   isContainerBlock,
-} from "~/types";
+} from '~/types';
 
 export const deleteBlock = (
   array: Array<Block>,
-  blockId: string
+  blockId: string,
 ): Array<Block> => {
   return array
-    .filter((e) => e.id !== blockId)
+    .filter(e => e.id !== blockId)
     .map((object) => {
       if (isContainerBlock(object)) {
         return {
@@ -26,7 +26,7 @@ export const deleteBlock = (
 
 export const updateBlock = (
   blocks: Array<Block>,
-  newBlock: Block
+  newBlock: Block,
 ): Array<Block> => {
   return blocks.map((block) => {
     if (isContainerBlock(block)) {
@@ -47,12 +47,12 @@ export const updateBlock = (
 export const addHistoryItem = (
   method: (item: BlockHistoryItem) => void,
   action: BlockHistoryAction,
-  blocks: Array<Block>
+  blocks: Array<Block>,
 ) => {
   method({
     id: nanoid(10),
-    action: action,
-    blocks: blocks,
+    action,
+    blocks,
     timestamp: new Date().getTime(),
   });
 };

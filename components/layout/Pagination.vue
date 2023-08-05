@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+// eslint-disable-next-line func-call-spacing
 defineEmits<{
-  (e: "update:modelValue", value: number): void;
+  (e: 'update:modelValue', value: number): void;
 }>();
 defineProps<{
   total: number;
@@ -18,7 +19,7 @@ defineProps<{
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
           d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"
-        ></path>
+        />
       </svg>
     </button>
     <button
@@ -38,7 +39,7 @@ defineProps<{
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
           d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"
-        ></path>
+        />
       </svg>
     </button>
   </div>

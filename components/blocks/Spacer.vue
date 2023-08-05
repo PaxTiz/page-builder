@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SpacerBlock } from "~/types";
+import { SpacerBlock } from '~/types';
 
 const props = defineProps<{
   block: SpacerBlock;
@@ -10,7 +10,7 @@ const styles = computed(() => {
   if (props.block.width) {
     classes.width = `${props.block.width}px`;
   } else {
-    classes.width = "100%";
+    classes.width = '100%';
   }
 
   const height = props.block.height ?? 16;
@@ -21,7 +21,7 @@ const styles = computed(() => {
 </script>
 
 <template>
-  <div class="__block" :style="styles"></div>
+  <div class="__block" :style="styles" />
 </template>
 
 <style lang="scss" scoped></style>

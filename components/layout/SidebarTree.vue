@@ -1,18 +1,19 @@
 <script lang="ts" setup>
-import { Draggable } from "@he-tree/vue";
-import "@he-tree/vue/style/default.css";
-import { Block, isContainerBlock } from "~/types";
-import SidebarTreeItem from "./SidebarTreeItem.vue";
+import { Draggable } from '@he-tree/vue';
+import '@he-tree/vue/style/default.css';
+import SidebarTreeItem from './SidebarTreeItem.vue';
+import { Block, isContainerBlock } from '~/types';
 
+// eslint-disable-next-line func-call-spacing
 const emit = defineEmits<{
-  (e: "update:modelValue", blocks: Array<Block>): void;
+  (e: 'update:modelValue', blocks: Array<Block>): void;
 }>();
 defineProps<{
   modelValue: Array<Block>;
 }>();
 
 const onMove = (blocks: Array<Block>) => {
-  emit("update:modelValue", blocks);
+  emit('update:modelValue', blocks);
 };
 </script>
 
@@ -22,7 +23,7 @@ const onMove = (blocks: Array<Block>) => {
       :watermark="false"
       :model-value="modelValue"
       :each-droppable="(stat) => isContainerBlock(stat.data)"
-      @update:modelValue="onMove"
+      @update:model-value="onMove"
     >
       <template #default="{ node, stat }">
         <SidebarTreeItem

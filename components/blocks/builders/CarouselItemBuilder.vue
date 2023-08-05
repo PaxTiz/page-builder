@@ -1,25 +1,23 @@
 <script lang="ts" setup>
-import { ZodSchema } from "zod";
-import { CarouselItemBlock } from "~/types";
-import FormBuilder from "./FormBuilder.vue";
+import { ZodSchema } from 'zod';
+import FormBuilder from './FormBuilder.vue';
+import { CarouselItemBlock } from '~/types';
 
-const emit = defineEmits<{
-  (e: "update:modelValue", block: CarouselItemBlock): void;
-  (e: "save", block: CarouselItemBlock): void;
-}>();
+const emit = defineEmits<{(e: 'save', block: CarouselItemBlock): void;}>();
 const props = defineProps<{
-  modelValue: CarouselItemBlock;
+  block: CarouselItemBlock;
   validator: ZodSchema;
 }>();
 
+const currentBlock = toRef(props, 'block');
 const { error, validate } = useBlockValidation<CarouselItemBlock>(
-  props.validator
+  props.validator,
 );
 
 const onSave = () => {
-  const response = validate<CarouselItemBlock>(props.modelValue);
+  const response = validate<CarouselItemBlock>(currentBlock.value);
   if (response) {
-    emit("save", response);
+    emit('save', response);
   }
 };
 
@@ -27,10 +25,10 @@ const onUpdateImage = (event: Event) => {
   const files = (event.target as HTMLInputElement).files;
   if (files?.length === 1) {
     const file = files[0];
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result as string;
-      emit("update:modelValue", { ...props.modelValue, image: base64 });
+      currentBlock.value.image = base64;
     };
     reader.readAsDataURL(file);
   }
@@ -38,34 +36,31 @@ const onUpdateImage = (event: Event) => {
 </script>
 
 <template>
-  <FormBuilder v-model="modelValue.name" @save="onSave">
+  <FormBuilder v-model="currentBlock.name" @save="onSave">
     <div class="form-group" :class="{ error: error('title') }">
       <label for="title"> Title </label>
-      <input v-model="modelValue.title" id="title" type="text" />
+      <input id="title" v-model="currentBlock.title" type="text">
       <span>{{ error("title") }}</span>
     </div>
 
     <div class="form-group" :class="{ error: error('description') }">
       <label for="description"> Description </label>
-      <input v-model="modelValue.description" id="description" type="text" />
+      <input id="description" v-model="currentBlock.description" type="text">
       <span>{{ error("description") }}</span>
     </div>
 
     <div class="form-group" :class="{ error: error('url') }">
       <label for="url"> URL </label>
-      <input v-model="modelValue.url" id="url" type="text" />
+      <input id="url" v-model="currentBlock.url" type="text">
       <span>{{ error("url") }}</span>
     </div>
 
     <div class="form-group" :class="{ error: error('image') }">
       <label for="image"> Image </label>
-      <small class="text-xs italic ml-2">
-        — You must save in order to update the page
-      </small>
-      <input id="image" type="file" @change="onUpdateImage" />
+      <input id="image" type="file" @change="onUpdateImage">
       <span>{{ error("image") }}</span>
 
-      <img class="block w-full h-auto mt-2 rounded" :src="modelValue.image" />
+      <img class="block w-full h-auto mt-2 rounded" :src="currentBlock.image">
     </div>
   </FormBuilder>
 </template>

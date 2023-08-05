@@ -1,1 +1,1 @@
-export type ApplicationState = "editor" | "preview";
+export type ApplicationState = 'editor' | 'preview';

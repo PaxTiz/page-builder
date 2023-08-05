@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+// eslint-disable-next-line func-call-spacing
 defineEmits<{
-  (e: "click"): void;
+  (e: 'click'): void;
 }>();
 
 defineProps<{
@@ -8,7 +9,7 @@ defineProps<{
 }>();
 
 defineSlots<{
-  default: () => VNode;
+  default:() => VNode;
 }>();
 </script>
 

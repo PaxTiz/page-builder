@@ -1,38 +1,36 @@
 <script lang="ts" setup>
-import { ZodSchema } from "zod";
-import { SpacerBlock } from "~/types";
-import FormBuilder from "./FormBuilder.vue";
+import { ZodSchema } from 'zod';
+import FormBuilder from './FormBuilder.vue';
+import { SpacerBlock } from '~/types';
 
-const emit = defineEmits<{
-  (e: "update:modelValue", block: SpacerBlock): void;
-  (e: "save", block: SpacerBlock): void;
-}>();
+const emit = defineEmits<{(e: 'save', block: SpacerBlock): void;}>();
 const props = defineProps<{
-  modelValue: SpacerBlock;
+  block: SpacerBlock;
   validator: ZodSchema;
 }>();
 
+const currentBlock = toRef(props, 'block');
 const { error, validate } = useBlockValidation<SpacerBlock>(props.validator);
 
 const onSave = () => {
-  const response = validate<SpacerBlock>(props.modelValue);
+  const response = validate<SpacerBlock>(currentBlock.value);
   if (response) {
-    emit("save", response);
+    emit('save', response);
   }
 };
 </script>
 
 <template>
-  <FormBuilder v-model="modelValue.name" @save="onSave">
+  <FormBuilder v-model="currentBlock.name" @save="onSave">
     <div class="form-group" :class="{ error: error('width') }">
       <label for="width"> Width </label>
-      <input v-model="modelValue.width" id="width" type="number" />
+      <input id="width" v-model="currentBlock.width" type="number">
       <span>{{ error("width") }}</span>
     </div>
 
     <div class="form-group" :class="{ error: error('height') }">
       <label for="height"> Height </label>
-      <input v-model="modelValue.height" id="height" type="number" />
+      <input id="height" v-model="currentBlock.height" type="number">
       <span>{{ error("height") }}</span>
     </div>
   </FormBuilder>

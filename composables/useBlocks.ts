@@ -1,8 +1,8 @@
-import { nanoid } from "nanoid";
-import { Block } from "~/types";
+import { nanoid } from 'nanoid';
+import { Block } from '~/types';
 
 export const useBlocks = () => {
-  const blocksState: Ref<Array<Block>> = useState("blocks", () => []);
+  const blocksState: Ref<Array<Block>> = useState('blocks', () => []);
   const { undo: undoAction, canUndo } = useRefHistory(blocksState);
   const { save } = usePageHistory();
 
@@ -15,7 +15,7 @@ export const useBlocks = () => {
       },
     ];
 
-    addHistoryItem(save, "addBlock", blocksState.value);
+    addHistoryItem(save, 'addBlock', blocksState.value);
   };
 
   const setBlocks = (blocks: Array<Block>) => {
@@ -24,12 +24,12 @@ export const useBlocks = () => {
 
   const remove = (blockId: string) => {
     blocksState.value = deleteBlock(blocksState.value, blockId);
-    addHistoryItem(save, "deleteBlock", blocksState.value);
+    addHistoryItem(save, 'deleteBlock', blocksState.value);
   };
 
   const move = (blocks: Array<Block>) => {
     blocksState.value = blocks;
-    addHistoryItem(save, "moveBlock", blocksState.value);
+    addHistoryItem(save, 'moveBlock', blocksState.value);
   };
 
   const update = (block: Block) => {
@@ -38,7 +38,7 @@ export const useBlocks = () => {
 
   const undo = () => {
     undoAction();
-    addHistoryItem(save, "undo", blocksState.value);
+    addHistoryItem(save, 'undo', blocksState.value);
   };
 
   return {

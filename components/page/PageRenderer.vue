@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import Button from "~/components/blocks/Button.vue";
-import CallToAction from "~/components/blocks/CallToAction.vue";
-import Carousel from "~/components/blocks/Carousel.vue";
-import Container from "~/components/blocks/Container.vue";
-import Image from "~/components/blocks/Image.vue";
-import Spacer from "~/components/blocks/Spacer.vue";
-import { Block } from "~/types";
+import Button from '~/components/blocks/Button.vue';
+import CallToAction from '~/components/blocks/CallToAction.vue';
+import Carousel from '~/components/blocks/Carousel.vue';
+import Container from '~/components/blocks/Container.vue';
+import Image from '~/components/blocks/Image.vue';
+import Spacer from '~/components/blocks/Spacer.vue';
+import { Block } from '~/types';
 
 defineProps<{
   children: Array<Block>;

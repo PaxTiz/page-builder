@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import Toast from "~/components/layout/Toast.vue";
-import PageEditor from "~/components/page/PageEditor.vue";
-import PagePreview from "~/components/page/PagePreview.vue";
+import Toast from '~/components/layout/Toast.vue';
+import PageEditor from '~/components/page/PageEditor.vue';
+import PagePreview from '~/components/page/PagePreview.vue';
 
 const { state } = useApplication();
 </script>
@@ -16,8 +16,12 @@ const { state } = useApplication();
     </div>
 
     <div class="unsupported">
-      <h1 class="mt-0">Your device is not supported</h1>
-      <p class="m-0">The page editor is only available on desktop.</p>
+      <h1 class="mt-0">
+        Your device is not supported
+      </h1>
+      <p class="m-0">
+        The page editor is only available on desktop.
+      </p>
     </div>
   </div>
 </template>

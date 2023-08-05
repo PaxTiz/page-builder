@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import ButtonBuilder from "~/components/blocks/builders/ButtonBuilder.vue";
-import CallToActionBuilder from "~/components/blocks/builders/CallToActionBuilder.vue";
-import CarouselBuilder from "~/components/blocks/builders/CarouselBuilder.vue";
-import CarouselItemBuilder from "~/components/blocks/builders/CarouselItemBuilder.vue";
-import ContainerBuilder from "~/components/blocks/builders/ContainerBuilder.vue";
-import ImageBuilder from "~/components/blocks/builders/ImageBuilder.vue";
-import SpacerBuilder from "~/components/blocks/builders/SpacerBuilder.vue";
-import { getBlockByType } from "~/constants/blocks";
+import ButtonBuilder from '~/components/blocks/builders/ButtonBuilder.vue';
+import CallToActionBuilder from '~/components/blocks/builders/CallToActionBuilder.vue';
+import CarouselBuilder from '~/components/blocks/builders/CarouselBuilder.vue';
+import CarouselItemBuilder from '~/components/blocks/builders/CarouselItemBuilder.vue';
+import ContainerBuilder from '~/components/blocks/builders/ContainerBuilder.vue';
+import ImageBuilder from '~/components/blocks/builders/ImageBuilder.vue';
+import SpacerBuilder from '~/components/blocks/builders/SpacerBuilder.vue';
+import { getBlockByType } from '~/constants/blocks';
 import {
   Block,
   ButtonBlock,
@@ -16,7 +16,7 @@ import {
   ContainerBlock,
   ImageBlock,
   SpacerBlock,
-} from "~/types";
+} from '~/types';
 
 const props = defineProps<{
   block: Block;
@@ -24,7 +24,7 @@ const props = defineProps<{
 
 const { update } = useBlocks();
 const { setElement } = useSidebar();
-const editingBlock = ref(props.block);
+const editingBlock = toRef(props, 'block');
 
 const editingBlockValidator = getBlockByType(editingBlock.value.type).validator;
 
@@ -38,49 +38,49 @@ const onSave = (block: Block) => {
   <div class="p-4">
     <ContainerBuilder
       v-if="block.type === 'container'"
-      v-model="(editingBlock as ContainerBlock)"
+      :block="(editingBlock as ContainerBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />
 
     <CarouselBuilder
       v-if="block.type === 'carousel'"
-      v-model="(editingBlock as CarouselBlock)"
+      :block="(editingBlock as CarouselBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />
 
     <CarouselItemBuilder
       v-if="block.type === 'carouselItem'"
-      v-model="(editingBlock as CarouselItemBlock)"
+      :block="(editingBlock as CarouselItemBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />
 
     <SpacerBuilder
       v-if="block.type === 'spacer'"
-      v-model="(editingBlock as SpacerBlock)"
+      :block="(editingBlock as SpacerBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />
 
     <ButtonBuilder
       v-if="block.type === 'button'"
-      v-model="(editingBlock as ButtonBlock)"
+      :block="(editingBlock as ButtonBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />
 
     <CallToActionBuilder
       v-if="block.type === 'cta'"
-      v-model="(editingBlock as CallToActionBlock)"
+      :block="(editingBlock as CallToActionBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />
 
     <ImageBuilder
       v-if="block.type === 'image'"
-      v-model="(editingBlock as ImageBlock)"
+      :block="(editingBlock as ImageBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />

@@ -1,13 +1,13 @@
-import { sql } from "drizzle-orm";
-import { customType } from "drizzle-orm/mysql-core";
+import { sql } from 'drizzle-orm';
+import { customType } from 'drizzle-orm/mysql-core';
 
 export const uuidColumn = customType<{
   data: string;
   notNull: true;
   default: true;
 }>({
-  dataType() {
-    return "varchar(36)";
+  dataType () {
+    return 'varchar(36)';
   },
 });
 
@@ -22,10 +22,10 @@ interface NanoidColumn {
 }
 
 export const nanoidColumn = customType<NanoidColumn>({
-  dataType(config: any) {
-    return typeof config.length !== "undefined"
+  dataType (config: any) {
+    return typeof config.length !== 'undefined'
       ? `varchar(${config.length})`
-      : "varchar";
+      : 'varchar';
   },
 });
 

@@ -3,7 +3,8 @@ const props = defineProps<{
   tabs: Array<{ key: string; title: string }>;
 }>();
 
-const currentTab = ref(props.tabs[0].key);
+const tabs = toRef(props, 'tabs');
+const currentTab = ref(tabs.value[0].key);
 
 const onSelectTab = (key: string) => {
   if (currentTab.value !== key) {
@@ -28,7 +29,7 @@ const onSelectTab = (key: string) => {
         {{ tab.title }}
       </button>
     </div>
-    <div class="w-full bg-gray-700" style="height: 1px; margin-top: -1px"></div>
+    <div class="w-full bg-gray-700" style="height: 1px; margin-top: -1px" />
 
     <div class="p-8">
       <slot :name="currentTab" />

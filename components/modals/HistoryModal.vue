@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import Pagination from "~/components/layout/Pagination.vue";
-import Tabs from "~/components/layout/Tabs.vue";
-import { BlockHistoryAction, BlockHistoryItem } from "~/types";
-import Modal from "./Modal.vue";
+import Modal from './Modal.vue';
+import Pagination from '~/components/layout/Pagination.vue';
+import Tabs from '~/components/layout/Tabs.vue';
+import { BlockHistoryAction, BlockHistoryItem } from '~/types';
 
+// eslint-disable-next-line func-call-spacing
 const emit = defineEmits<{
-  (e: "close"): void;
+  (e: 'close'): void;
 }>();
 
 const { setState } = useApplication();
@@ -20,47 +21,49 @@ const paginatedHistory = computed(() => {
 
 const tabs = [
   {
-    key: "local",
-    title: "Local History",
+    key: 'local',
+    title: 'Local History',
   },
   {
-    key: "remote",
-    title: "Remote versions",
+    key: 'remote',
+    title: 'Remote versions',
   },
 ];
 
 const formattedAction = (action: BlockHistoryAction) => {
   switch (action) {
-    case "automatic":
-      return "Auto Save";
-    case "save":
-      return "Manual Save";
-    case "publish":
-      return "Publish";
-    case "addBlock":
-      return "Add Block";
-    case "deleteBlock":
-      return "Delete Block";
-    case "moveBlock":
-      return "Move Block";
+    case 'automatic':
+      return 'Auto Save';
+    case 'save':
+      return 'Manual Save';
+    case 'publish':
+      return 'Publish';
+    case 'addBlock':
+      return 'Add Block';
+    case 'deleteBlock':
+      return 'Delete Block';
+    case 'moveBlock':
+      return 'Move Block';
     default:
       return action;
   }
 };
 
 const onPreview = (item: BlockHistoryItem) => {
-  setState("preview", item.blocks);
+  setState('preview', item.blocks);
 };
 
-const onRestore = (item: BlockHistoryItem) => {
-  emit("close");
+const onRestore = (_item: BlockHistoryItem) => {
+  emit('close');
 };
 </script>
 
 <template>
   <Modal title="Page History">
     <template #footer>
-      <button class="button-red" @click="emit('close')">close</button>
+      <button class="button-red" @click="emit('close')">
+        close
+      </button>
     </template>
 
     <div class="h-98 overflow-scroll">

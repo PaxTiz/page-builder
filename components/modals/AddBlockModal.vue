@@ -1,34 +1,35 @@
 <script lang="ts" setup>
-import categories from "~/constants/block_categories";
-import allBlocks from "~/constants/blocks";
-import Modal from "./Modal.vue";
+import Modal from './Modal.vue';
+import categories from '~/constants/block_categories';
+import allBlocks from '~/constants/blocks';
 
+// eslint-disable-next-line func-call-spacing
 const emit = defineEmits<{
-  (e: "close"): void;
+  (e: 'close'): void;
 }>();
 
 const { add } = useBlocks();
-const searchQuery = ref("");
+const searchQuery = ref('');
 const selectedCategory = ref(0);
 const selectedBlock: Ref<string | null> = ref(null);
 
 const blocks = computed(() => {
   let _blocks = allBlocks;
   if (selectedCategory.value !== 0) {
-    _blocks = allBlocks.filter((e) => e.categoryId === selectedCategory.value);
+    _blocks = allBlocks.filter(e => e.categoryId === selectedCategory.value);
   }
 
   const query = searchQuery.value.toLowerCase();
-  return _blocks.filter((e) => e.name.toLowerCase().includes(query));
+  return _blocks.filter(e => e.name.toLowerCase().includes(query));
 });
 
 const insertNewBlock = () => {
   if (selectedBlock.value) {
-    const block = allBlocks.find((e) => e.default.type === selectedBlock.value);
+    const block = allBlocks.find(e => e.default.type === selectedBlock.value);
     add(block!.default);
   }
 
-  emit("close");
+  emit('close');
 };
 </script>
 
@@ -40,7 +41,7 @@ const insertNewBlock = () => {
         class="px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded"
         type="text"
         placeholder="Search..."
-      />
+      >
     </template>
 
     <template #sidebar>
@@ -60,8 +61,12 @@ const insertNewBlock = () => {
     </template>
 
     <template #footer>
-      <button class="button-red" @click="$emit('close')">Cancel</button>
-      <button class="button-blue" @click="insertNewBlock">Add block</button>
+      <button class="button-red" @click="$emit('close')">
+        Cancel
+      </button>
+      <button class="button-blue" @click="insertNewBlock">
+        Add block
+      </button>
     </template>
 
     <div class="h-70 overflow-scroll p-8">
@@ -78,10 +83,14 @@ const insertNewBlock = () => {
             "
             @click="() => (selectedBlock = block.default.type)"
           >
-            <p class="text-gray-300 m-0">{{ block.name }}</p>
+            <p class="text-gray-300 m-0">
+              {{ block.name }}
+            </p>
           </div>
         </template>
-        <p class="text-gray-300 m-0" v-else>No blocks found.</p>
+        <p v-else class="text-gray-300 m-0">
+          No blocks found.
+        </p>
       </div>
     </div>
   </Modal>

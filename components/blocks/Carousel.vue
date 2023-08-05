@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CarouselBlock } from "~/types";
+import { CarouselBlock } from '~/types';
 
 defineProps<{
   block: CarouselBlock;
@@ -22,7 +22,7 @@ defineProps<{
           :href="slide.url"
           :style="{ height: `${block.slideHeight}px` }"
         >
-          <img class="block object-cover rounded" :src="slide.image" />
+          <img class="block object-cover rounded" :src="slide.image">
         </a>
       </SwiperSlide>
     </Swiper>

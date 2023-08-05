@@ -1,7 +1,7 @@
-import { BlockHistory, BlockHistoryItem } from "~/types";
+import { BlockHistory, BlockHistoryItem } from '~/types';
 
 export const usePageHistory = () => {
-  const history: Ref<BlockHistory> = useSessionStorage("blocks_history", []);
+  const history: Ref<BlockHistory> = useSessionStorage('blocks_history', []);
 
   const sorted = useSorted(history, (a, b) => b.timestamp - a.timestamp);
 

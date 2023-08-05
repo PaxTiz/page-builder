@@ -1,7 +1,7 @@
-import { H3Event } from "h3";
-import { ZodSchema, z } from "zod";
+import { H3Event } from 'h3';
+import { ZodSchema, z } from 'zod';
 
-type Extraction = "body" | "params" | "query";
+type Extraction = 'body' | 'params' | 'query';
 
 export const validate = async (
   event: H3Event,
@@ -9,21 +9,21 @@ export const validate = async (
   ...extract: Array<Extraction>
 ) => {
   if (extract.length === 0) {
-    extract = ["body"];
+    extract = ['body'];
   }
 
   let value = {};
   for (const extractor of extract) {
-    if (extractor === "body") {
+    if (extractor === 'body') {
       const body = await readBody(event);
       value = { ...value, ...body };
     }
 
-    if (extractor === "query") {
+    if (extractor === 'query') {
       value = { ...value, ...getQuery(event) };
     }
 
-    if (extractor === "params") {
+    if (extractor === 'params') {
       value = { ...value, ...event.context.params };
     }
   }

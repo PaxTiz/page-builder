@@ -1,14 +1,14 @@
 export default [
   {
     id: 0,
-    name: "All",
+    name: 'All',
   },
   {
     id: 1,
-    name: "Containers",
+    name: 'Containers',
   },
   {
     id: 2,
-    name: "Elements",
+    name: 'Elements',
   },
 ];

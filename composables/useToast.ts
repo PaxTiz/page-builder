@@ -1,7 +1,7 @@
-import { Toast } from "~/types";
+import { Toast } from '~/types';
 
 export const useToast = () => {
-  const _toast: Ref<Toast | null> = useState("toast", () => null);
+  const _toast: Ref<Toast | null> = useState('toast', () => null);
   let timer: NodeJS.Timeout | null = null;
 
   const set = (toast: Toast) => {

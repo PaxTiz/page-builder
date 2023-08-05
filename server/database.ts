@@ -1,13 +1,13 @@
-import { config } from "dotenv";
-import { exit } from "process";
+import { exit } from 'process';
+import { config } from 'dotenv';
 
-import { drizzle } from "drizzle-orm/mysql2";
-import { migrate } from "drizzle-orm/mysql2/migrator";
-import { createPool } from "mysql2";
-import * as schema from "./schema";
+import { drizzle } from 'drizzle-orm/mysql2';
+import { migrate } from 'drizzle-orm/mysql2/migrator';
+import { createPool } from 'mysql2';
+import * as schema from './schema';
 config();
 
-const isMigration = process.argv.length === 3 && process.argv[2] === "migrate";
+const isMigration = process.argv.length === 3 && process.argv[2] === 'migrate';
 
 const connection = createPool({
   host: process.env.DATABASE_HOST,
@@ -25,7 +25,7 @@ export const database = drizzle(connection, {
 
 if (isMigration) {
   (async () => {
-    await migrate(database, { migrationsFolder: "./server/migrations" });
+    await migrate(database, { migrationsFolder: './server/migrations' });
     exit(0);
   })();
 }

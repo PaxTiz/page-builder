@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ImageBlock } from "~/types";
+import { ImageBlock } from '~/types';
 
 const props = defineProps<{
   block: ImageBlock;
@@ -10,13 +10,13 @@ const styles = computed(() => {
   if (props.block.width) {
     classes.width = `${props.block.width}px`;
   } else {
-    classes.width = "100%";
+    classes.width = '100%';
   }
 
   if (props.block.height) {
     classes.height = `${props.block.height}px`;
   } else {
-    classes.height = "auto";
+    classes.height = 'auto';
   }
 
   return classes;
@@ -25,11 +25,11 @@ const styles = computed(() => {
 
 <template>
   <img
-    class="__block block w-full h-auto object-cover"
+    class="__block block w-full h-auto object-cover rounded"
     :style="styles"
     :src="block.url"
     :alt="block.title"
-  />
+  >
 </template>
 
 <style lang="scss" scoped></style>

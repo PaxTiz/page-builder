@@ -1,13 +1,13 @@
-import { Block } from "./blocks";
+import { Block } from './blocks';
 
 export type BlockHistoryAction =
-  | "automatic"
-  | "save"
-  | "publish"
-  | "addBlock"
-  | "deleteBlock"
-  | "moveBlock"
-  | "undo";
+  | 'automatic'
+  | 'save'
+  | 'publish'
+  | 'addBlock'
+  | 'deleteBlock'
+  | 'moveBlock'
+  | 'undo';
 
 export type BlockHistoryItem = {
   id: string;

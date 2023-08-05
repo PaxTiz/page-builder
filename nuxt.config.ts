@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
-  css: ["~/assets/scss/app.scss"],
+  css: ['~/assets/scss/app.scss'],
 
-  modules: ["@unocss/nuxt", "nuxt-swiper", "@vueuse/nuxt"],
+  modules: ['@unocss/nuxt', 'nuxt-swiper', '@vueuse/nuxt'],
 
   swiper: {
-    modules: ["autoplay", "navigation", "pagination"],
+    modules: ['autoplay', 'navigation', 'pagination'],
   },
 });

@@ -1,11 +1,11 @@
 export type BlockType =
-  | "button"
-  | "cta"
-  | "container"
-  | "carousel"
-  | "carouselItem"
-  | "image"
-  | "spacer";
+  | 'button'
+  | 'cta'
+  | 'container'
+  | 'carousel'
+  | 'carouselItem'
+  | 'image'
+  | 'spacer';
 
 export type BaseBlock = {
   id: string;
@@ -19,22 +19,23 @@ export type SizedBlock = BaseBlock & {
 };
 
 export type BlockWithChildren = BaseBlock & {
+  // eslint-disable-next-line no-use-before-define
   children: Array<Block>;
 };
 
 export type ContainerBlock = BlockWithChildren & {
-  type: "container";
+  type: 'container';
 };
 
 export type ButtonBlock = BaseBlock & {
-  type: "button";
+  type: 'button';
   text: string;
   url: string;
-  target: "_blank" | "_self";
+  target: '_blank' | '_self';
 };
 
 export type CallToActionBlock = BaseBlock & {
-  type: "cta";
+  type: 'cta';
   title: string;
   subtitle: string;
   url: string;
@@ -42,13 +43,13 @@ export type CallToActionBlock = BaseBlock & {
 };
 
 export type ImageBlock = SizedBlock & {
-  type: "image";
+  type: 'image';
   title: string;
   url: string;
 };
 
 export type CarouselItemBlock = BaseBlock & {
-  type: "carouselItem";
+  type: 'carouselItem';
   title: string;
   description: string;
   url: string;
@@ -56,7 +57,7 @@ export type CarouselItemBlock = BaseBlock & {
 };
 
 export type CarouselBlock = BlockWithChildren & {
-  type: "carousel";
+  type: 'carousel';
   children: Array<CarouselItemBlock>;
   slidesPerPage: number;
   slideHeight: number;
@@ -65,7 +66,7 @@ export type CarouselBlock = BlockWithChildren & {
 };
 
 export type SpacerBlock = SizedBlock & {
-  type: "spacer";
+  type: 'spacer';
 };
 
 export type Block =
@@ -79,7 +80,7 @@ export type Block =
   | SpacerBlock;
 
 export const isContainerBlock = (
-  object: Block
+  object: Block,
 ): object is BlockWithChildren => {
-  return object.type === "container" || object.type === "carousel";
+  return object.type === 'container' || object.type === 'carousel';
 };

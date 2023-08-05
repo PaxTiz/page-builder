@@ -1,17 +1,18 @@
 <script lang="ts" setup>
-import { VNode } from "nuxt/dist/app/compat/capi";
+import { VNode } from 'nuxt/dist/app/compat/capi';
 
 defineProps<{
   title: string;
 }>();
 
+// eslint-disable-next-line func-call-spacing
 defineEmits<{
-  (e: "ok"): void;
-  (e: "cancel"): void;
+  (e: 'ok'): void;
+  (e: 'cancel'): void;
 }>();
 
 const slots = defineSlots<{
-  header?: () => VNode;
+  header?:() => VNode;
   sidebar?: () => VNode;
   default: () => VNode;
   footer: () => VNode;
@@ -24,7 +25,9 @@ const slots = defineSlots<{
       <div
         class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
       >
-        <h2 class="text-gray-300 m-0">{{ title }}</h2>
+        <h2 class="text-gray-300 m-0">
+          {{ title }}
+        </h2>
 
         <slot name="header" />
       </div>

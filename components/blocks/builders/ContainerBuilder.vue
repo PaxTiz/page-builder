@@ -1,22 +1,20 @@
 <script lang="ts" setup>
-import { ZodSchema } from "zod";
-import { ContainerBlock } from "~/types";
-import FormBuilder from "./FormBuilder.vue";
+import { ZodSchema } from 'zod';
+import FormBuilder from './FormBuilder.vue';
+import { ContainerBlock } from '~/types';
 
-const emit = defineEmits<{
-  (e: "update:modelValue", block: ContainerBlock): void;
-  (e: "save", block: ContainerBlock): void;
-}>();
+const emit = defineEmits<{(e: 'save', block: ContainerBlock): void;}>();
 const props = defineProps<{
-  modelValue: ContainerBlock;
+  block: ContainerBlock;
   validator: ZodSchema;
 }>();
 
+const currentblock = toRef(props, 'block');
 const onSave = () => {
-  emit("save", props.modelValue);
+  emit('save', currentblock.value);
 };
 </script>
 
 <template>
-  <FormBuilder v-model="modelValue.name" @save="onSave" />
+  <FormBuilder v-model="currentblock.name" @save="onSave" />
 </template>
