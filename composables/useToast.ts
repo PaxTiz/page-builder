@@ -10,10 +10,12 @@ export const useToast = () => {
       clearTimeout(timer);
     }
 
-    timer = setTimeout(() => {
-      _toast.value = null;
-      clearTimeout(timer!);
-    }, toast.duration ?? 1000);
+    if (toast.type !== 'spin') {
+      timer = setTimeout(() => {
+        _toast.value = null;
+        clearTimeout(timer!);
+      }, toast.duration ?? 1000);
+    }
   };
 
   return { toast: _toast, set };

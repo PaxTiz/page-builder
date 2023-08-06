@@ -14,7 +14,7 @@ const { save } = usePageHistory();
 
 const saveInterval: Ref<NodeJS.Timer | undefined> = ref();
 
-const onSave = (action: BlockHistoryAction, manualSave = true) => {
+const onSave = async (action: BlockHistoryAction, manualSave = true) => {
   /**
    * TODO: Validate blocks before saving on backend
    *
@@ -26,7 +26,12 @@ const onSave = (action: BlockHistoryAction, manualSave = true) => {
    * it's local history.
    */
 
-  save(page.value.id, {
+  set({
+    type: 'spin',
+    message: 'The page is being saved...',
+  });
+
+  await save(page.value.id, {
     id: nanoid(10),
     timestamp: new Date().getTime(),
     blocks: page.value.blocks,
@@ -35,7 +40,7 @@ const onSave = (action: BlockHistoryAction, manualSave = true) => {
 
   set({
     type: 'success',
-    duration: manualSave ? 2000 : 1000,
+    duration: 2000,
     message: manualSave
       ? 'The page has been saved!'
       : 'The page has been auto-saved!',
