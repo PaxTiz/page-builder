@@ -6,12 +6,12 @@ import { validate } from '../../../validation';
 
 export default eventHandler(async (event) => {
   const schema = z.object({
-    id: z.string().uuid(),
+    pageId: z.string().uuid(),
   });
 
-  const params = await validate(event, schema, 'params');
+  const params = await validate<z.infer<typeof schema>>(event, schema, ['params']);
 
   return database.query.pages.findFirst({
-    where: eq(pages.id, params.id),
+    where: eq(pages.id, params.pageId),
   });
 });

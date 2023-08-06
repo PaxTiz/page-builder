@@ -1,13 +1,16 @@
 import { Block } from './blocks';
 
-export type BlockHistoryAction =
-  | 'automatic'
-  | 'save'
-  | 'publish'
-  | 'addBlock'
-  | 'deleteBlock'
-  | 'moveBlock'
-  | 'undo';
+export const historyActions = [
+  'automatic',
+  'save',
+  'publish',
+  'addBlock',
+  'deleteBlock',
+  'moveBlock',
+  'undo',
+] as const;
+
+export type BlockHistoryAction = typeof historyActions[number];
 
 export type BlockHistoryItem = {
   id: string;

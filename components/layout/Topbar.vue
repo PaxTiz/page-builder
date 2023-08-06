@@ -26,7 +26,7 @@ const onSave = (action: BlockHistoryAction, manualSave = true) => {
    * it's local history.
    */
 
-  save({
+  save(page.value.id, {
     id: nanoid(10),
     timestamp: new Date().getTime(),
     blocks: page.value.blocks,

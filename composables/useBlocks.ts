@@ -28,7 +28,7 @@ export const useBlocks = () => {
       ],
     };
 
-    addHistoryItem(save, 'addBlock', page.value.blocks);
+    addHistoryItem(save, page.value.id, 'addBlock', page.value.blocks);
   };
 
   const setBlocks = (blocks: Array<Block>) => {
@@ -43,7 +43,7 @@ export const useBlocks = () => {
       ...page.value,
       blocks: deleteBlock(page.value.blocks, blockId),
     };
-    addHistoryItem(save, 'deleteBlock', page.value.blocks);
+    addHistoryItem(save, page.value.id, 'deleteBlock', page.value.blocks);
   };
 
   const move = (blocks: Array<Block>) => {
@@ -51,7 +51,7 @@ export const useBlocks = () => {
       ...page.value,
       blocks,
     };
-    addHistoryItem(save, 'moveBlock', page.value.blocks);
+    addHistoryItem(save, page.value.id, 'moveBlock', page.value.blocks);
   };
 
   const update = (block: Block) => {
@@ -63,7 +63,7 @@ export const useBlocks = () => {
 
   const undo = () => {
     undoAction();
-    addHistoryItem(save, 'undo', page.value.blocks);
+    addHistoryItem(save, page.value.id, 'undo', page.value.blocks);
   };
 
   const load = async (pageId: string) => {

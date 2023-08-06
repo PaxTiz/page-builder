@@ -45,11 +45,12 @@ export const updateBlock = (
 };
 
 export const addHistoryItem = (
-  method: (item: BlockHistoryItem) => void,
+  method: (pageId: string, item: BlockHistoryItem) => void,
+  pageId: string,
   action: BlockHistoryAction,
   blocks: Array<Block>,
 ) => {
-  method({
+  method(pageId, {
     id: nanoid(10),
     action,
     blocks,

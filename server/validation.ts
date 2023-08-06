@@ -1,12 +1,12 @@
 import { H3Event } from 'h3';
-import { ZodSchema, z } from 'zod';
+import { ZodSchema } from 'zod';
 
 type Extraction = 'body' | 'params' | 'query';
 
-export const validate = async (
+export const validate = async <T>(
   event: H3Event,
   schema: ZodSchema,
-  ...extract: Array<Extraction>
+  extract: Array<Extraction>,
 ) => {
   if (extract.length === 0) {
     extract = ['body'];
@@ -30,7 +30,7 @@ export const validate = async (
 
   const response = schema.safeParse(value);
   if (response.success) {
-    return response.data as z.infer<typeof schema>;
+    return response.data as T;
   }
 
   throw createError({ status: 400, data: response.error.errors });

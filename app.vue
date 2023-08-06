@@ -4,10 +4,14 @@ import PageEditor from '~/components/page/PageEditor.vue';
 import PagePreview from '~/components/page/PagePreview.vue';
 
 const { state } = useApplication();
+const { loadHistory } = usePageHistory();
 const { load } = useBlocks();
 
 const route = useRoute();
-await load(route.query.id as string);
+const pageId = route.query.id as string;
+
+await load(pageId);
+await loadHistory(pageId);
 </script>
 
 <template>

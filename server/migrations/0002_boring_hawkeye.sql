@@ -1,0 +1,1 @@
+ALTER TABLE `pages_history` MODIFY COLUMN `timestamp` datetime NOT NULL;
