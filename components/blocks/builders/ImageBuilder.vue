@@ -11,6 +11,8 @@ const props = defineProps<{
 
 const currentBlock = toRef(props, 'block');
 const { error, validate } = useBlockValidation<ImageBlock>(props.validator);
+const { page } = useBlocks();
+const { set } = useToast();
 
 const onSave = () => {
   const response = validate<ImageBlock>(currentBlock.value);
@@ -19,16 +21,26 @@ const onSave = () => {
   }
 };
 
-const onUpdateImage = (event: Event) => {
+const onUpdateImage = async (event: Event) => {
   const files = (event.target as HTMLInputElement).files;
   if (files?.length === 1) {
     const file = files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64 = reader.result as string;
-      currentBlock.value.url = base64;
-    };
-    reader.readAsDataURL(file);
+    const formData = new FormData();
+    formData.append('file', file);
+    const { data, error } = await useFetch(`/api/pages/${page.value.id}/files`, {
+      method: 'post',
+      body: formData,
+    });
+
+    if (error.value) {
+      set({
+        type: 'error',
+        message: 'There was an error while uploading the file',
+        duration: 1000,
+      });
+    } else {
+      currentBlock.value.url = data.value!.url;
+    }
   }
 };
 </script>
