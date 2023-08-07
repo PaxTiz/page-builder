@@ -4,10 +4,7 @@ import Pagination from '~/components/layout/Pagination.vue';
 import Tabs from '~/components/layout/Tabs.vue';
 import { BlockHistoryAction, BlockHistoryItem } from '~/types';
 
-// eslint-disable-next-line func-call-spacing
-const emit = defineEmits<{
-  (e: 'close'): void;
-}>();
+const emit = defineEmits<{(e: 'close'): void;}>();
 
 const { setState } = useApplication();
 const { sorted } = usePageHistory();
@@ -22,11 +19,11 @@ const paginatedHistory = computed(() => {
 const tabs = [
   {
     key: 'local',
-    title: 'Local History',
+    title: 'My history',
   },
   {
     key: 'remote',
-    title: 'Remote versions',
+    title: 'All versions',
   },
 ];
 
