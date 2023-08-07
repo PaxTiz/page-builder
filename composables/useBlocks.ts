@@ -2,10 +2,8 @@ import { nanoid } from 'nanoid';
 import { Page } from '~/server/schema';
 import { Block } from '~/types';
 
-type ActualPage = Page & { blocks: Array<Block> }
-
 export const useBlocks = () => {
-  const page: Ref<ActualPage> = useState('page', () => ({
+  const page: Ref<Page> = useState('page', () => ({
     id: '',
     name: '',
     slug: '',
@@ -72,7 +70,7 @@ export const useBlocks = () => {
       throw createError(response.error.value);
     }
 
-    page.value = response.data.value as ActualPage;
+    page.value = response.data.value as Page;
   };
 
   return {
