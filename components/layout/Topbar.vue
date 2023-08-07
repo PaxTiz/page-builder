@@ -36,7 +36,7 @@ const onSave = async (action: BlockHistoryAction, manualSave = true) => {
     timestamp: new Date().getTime(),
     blocks: page.value.blocks,
     action,
-  });
+  }, page.value);
 
   set({
     type: 'success',
@@ -82,24 +82,25 @@ onBeforeUnmount(() => {
         <div>
           <span class="text-gray-300 text-sm font-bold">Page name :</span>
           <input
+            v-model="page.name"
             type="text"
             class="bg-transparent text-gray-300 border-none focus:outline-none p-2"
-            value="My new page"
             oninput="this.style.width = `${this.value.length}ch`"
           >
         </div>
         <div>
           <span class="text-gray-300 text-sm font-bold">Page URL :</span>
           <input
+
             type="text"
             class="bg-transparent text-gray border-none focus:outline-none p-2 pr-0"
             value="http://localhost:3000/"
             disabled
           >
           <input
+            v-model="page.slug"
             type="text"
             class="bg-transparent text-gray-300 border-none focus:outline-none p-2 pl-0 -ml-1"
-            value="my-new-page"
             oninput="this.style.width = `${this.value.length}ch`"
           >
         </div>

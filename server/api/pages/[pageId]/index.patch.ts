@@ -1,17 +1,21 @@
 import { eq, sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { historyActions } from '../../../../../types';
-import { database } from '../../../../database';
-import { pages, pagesHistory } from '../../../../schema';
-import { validate } from '../../../../validation';
+import { historyActions } from '../../../../types';
+import { database } from '../../../database';
+import { pages, pagesHistory } from '../../../schema';
+import { validate } from '../../../validation';
 
 export default eventHandler(async (event) => {
   const schema = z.object({
     pageId: z.string().uuid(),
-    id: z.string().length(10),
-    timestamp: z.number(),
-    action: z.enum(historyActions),
+    name: z.string(),
+    slug: z.string(),
     blocks: z.array(z.any()),
+    history: z.object({
+      id: z.string().length(10),
+      timestamp: z.number(),
+      action: z.enum(historyActions),
+    }),
   });
 
   const input = await validate<z.infer<typeof schema>>(event, schema, ['params', 'body']);
@@ -40,13 +44,19 @@ export default eventHandler(async (event) => {
     }
 
     await tx.insert(pagesHistory).values({
-      id: input.id,
-      action: input.action,
-      timestamp: new Date(input.timestamp),
+      id: input.history.id,
+      action: input.history.action,
+      timestamp: new Date(input.history.timestamp),
       blocks: input.blocks,
       pageId: input.pageId,
     });
+
+    await tx.update(pages).set({
+      name: input.name,
+      slug: input.slug,
+      blocks: input.blocks,
+    }).where(eq(pages.id, input.pageId));
   });
 
-  return { message: 'page_history_created' };
+  return { message: 'page_updated' };
 });
