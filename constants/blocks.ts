@@ -167,6 +167,19 @@ const blocks: Array<{
         path: ['width'],
       }),
   },
+  {
+    categoryId: 2,
+    name: 'Text',
+    default: {
+      id: '-1',
+      name: 'Text',
+      type: 'text',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget velit at felis porttitor pharetra. Maecenas nec risus aliquet, pretium velit id, ullamcorper eros.',
+    },
+    validator: z.object({
+      text: z.string(),
+    }),
+  },
 ];
 
 export const getBlockByType = (type: BlockType) => {

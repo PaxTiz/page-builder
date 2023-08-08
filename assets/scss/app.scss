@@ -41,6 +41,7 @@ body {
       }
 
       input,
+      textarea,
       select {
         @apply border-red;
       }
@@ -48,9 +49,14 @@ body {
   }
 
   input,
+  textarea,
   select {
     margin-top: 8px;
     @apply w-full px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded;
+  }
+
+  textarea {
+    resize: vertical;
   }
 
   ::file-selector-button {

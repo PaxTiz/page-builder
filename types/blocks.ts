@@ -5,7 +5,8 @@ export type BlockType =
   | 'carousel'
   | 'carouselItem'
   | 'image'
-  | 'spacer';
+  | 'spacer'
+  | 'text';
 
 export type BaseBlock = {
   id: string;
@@ -69,6 +70,10 @@ export type SpacerBlock = SizedBlock & {
   type: 'spacer';
 };
 
+export type TextBlock = BaseBlock & {
+  text: string
+}
+
 export type Block =
   | BlockWithChildren
   | ContainerBlock
@@ -77,7 +82,8 @@ export type Block =
   | ImageBlock
   | CarouselBlock
   | CarouselItemBlock
-  | SpacerBlock;
+  | SpacerBlock
+  | TextBlock;
 
 export const isContainerBlock = (
   object: Block,

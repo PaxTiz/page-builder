@@ -6,6 +6,7 @@ import CarouselItemBuilder from '~/components/blocks/builders/CarouselItemBuilde
 import ContainerBuilder from '~/components/blocks/builders/ContainerBuilder.vue';
 import ImageBuilder from '~/components/blocks/builders/ImageBuilder.vue';
 import SpacerBuilder from '~/components/blocks/builders/SpacerBuilder.vue';
+import TextBuilder from '~/components/blocks/builders/TextBuilder.vue';
 import { getBlockByType } from '~/constants/blocks';
 import {
   Block,
@@ -16,6 +17,7 @@ import {
   ContainerBlock,
   ImageBlock,
   SpacerBlock,
+  TextBlock,
 } from '~/types';
 
 const props = defineProps<{
@@ -81,6 +83,13 @@ const onSave = (block: Block) => {
     <ImageBuilder
       v-if="block.type === 'image'"
       :block="(editingBlock as ImageBlock)"
+      :validator="editingBlockValidator"
+      @save="onSave"
+    />
+
+    <TextBuilder
+      v-if="block.type === 'text'"
+      :block="(editingBlock as TextBlock)"
       :validator="editingBlockValidator"
       @save="onSave"
     />

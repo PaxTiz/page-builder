@@ -5,6 +5,7 @@ import Carousel from '~/components/blocks/Carousel.vue';
 import Container from '~/components/blocks/Container.vue';
 import Image from '~/components/blocks/Image.vue';
 import Spacer from '~/components/blocks/Spacer.vue';
+import Text from '~/components/blocks/Text.vue';
 import { Block } from '~/types';
 
 defineProps<{
@@ -21,6 +22,7 @@ defineProps<{
       <Spacer v-if="block.type === 'spacer'" :block="block" />
       <Carousel v-if="block.type === 'carousel'" :block="block" />
       <Image v-if="block.type === 'image'" :block="block" />
+      <Text v-if="block.type === 'text'" :block="block" />
     </template>
   </div>
 </template>
