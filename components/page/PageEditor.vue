@@ -11,7 +11,7 @@ const { page } = useBlocks();
     <Sidebar :children="page.blocks" />
     <Topbar />
 
-    <div class="page pt-20 z-0 px-8">
+    <div class="page pt-20 pb-10 z-0 px-8">
       <div class="shadow-white bg-gray-900 rounded">
         <PageRenderer :children="page.blocks" />
       </div>
