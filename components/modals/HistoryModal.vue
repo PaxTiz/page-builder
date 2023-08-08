@@ -6,6 +6,7 @@ import { BlockHistoryAction, BlockHistoryItem } from '~/types';
 
 const emit = defineEmits<{(e: 'close'): void;}>();
 
+const { setBlocks } = useBlocks();
 const { setState } = useApplication();
 const { sorted } = usePageHistory();
 const page = ref(1);
@@ -50,7 +51,8 @@ const onPreview = (item: BlockHistoryItem) => {
   setState('preview', item.blocks);
 };
 
-const onRestore = (_item: BlockHistoryItem) => {
+const onRestore = (item: BlockHistoryItem) => {
+  setBlocks(item.blocks);
   emit('close');
 };
 </script>
