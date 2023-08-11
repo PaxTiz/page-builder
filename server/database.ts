@@ -20,6 +20,7 @@ const connection = createPool({
 
 export const database = drizzle(connection, {
   schema,
+  mode: 'default',
   logger: Boolean(process.env.ENABLE_SQL_LOGS),
 });
 

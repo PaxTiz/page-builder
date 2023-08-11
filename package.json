@@ -18,7 +18,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@types/node": "^18.17.0",
-    "@unocss/nuxt": "^0.53.6",
+    "@unocss/nuxt": "^0.55.0",
     "@unocss/transformer-directives": "^0.53.6",
     "@vueuse/core": "^10.2.1",
     "@vueuse/nuxt": "^10.2.1",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@he-tree/vue": "^2.4.2",
     "drizzle-kit": "^0.19.12",
-    "drizzle-orm": "^0.27.2",
+    "drizzle-orm": "^0.28.2",
     "mysql2": "^3.6.0",
     "nanoid": "^4.0.2",
     "nuxt-swiper": "^1.2.0",
