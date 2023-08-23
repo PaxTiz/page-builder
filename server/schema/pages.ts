@@ -1,4 +1,4 @@
-import { InferModel } from 'drizzle-orm';
+import { InferSelectModel } from 'drizzle-orm';
 import { json, mysqlTable, varchar } from 'drizzle-orm/mysql-core';
 import { Block } from '../../types';
 import { uuid } from './utils';
@@ -10,4 +10,4 @@ export const pages = mysqlTable('pages', {
   blocks: json('blocks').$type<Array<Block>>().notNull(),
 });
 
-export type Page = InferModel<typeof pages>;
+export type Page = InferSelectModel<typeof pages>;

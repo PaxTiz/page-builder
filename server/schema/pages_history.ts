@@ -1,4 +1,4 @@
-import { InferModel, relations } from 'drizzle-orm';
+import { InferSelectModel, relations } from 'drizzle-orm';
 import { datetime, json, mysqlEnum, mysqlTable } from 'drizzle-orm/mysql-core';
 import { Block, historyActions } from '../../types';
 import { pages } from './pages';
@@ -21,4 +21,4 @@ export const pagesHistoryRelations = relations(pagesHistory, ({ one }) => ({
   }),
 }));
 
-export type PageHistorry = InferModel<typeof pagesHistory>
+export type PageHistorry = InferSelectModel<typeof pagesHistory>

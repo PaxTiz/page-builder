@@ -1,4 +1,4 @@
-import { InferModel } from 'drizzle-orm';
+import { InferSelectModel } from 'drizzle-orm';
 import { mysqlTable, varchar } from 'drizzle-orm/mysql-core';
 import { uuid } from './utils';
 
@@ -10,4 +10,4 @@ export const users = mysqlTable('users', {
   password: varchar('password', { length: 60 }).notNull(),
 });
 
-export type User = InferModel<typeof users>;
+export type User = InferSelectModel<typeof users>;
