@@ -6,8 +6,9 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/tailwindcss',
-    'nuxt-swiper', 
-    '@vueuse/nuxt'
+    'nuxt-swiper',
+    '@vueuse/nuxt',
+    'nuxt-tiptap-editor',
   ],
 
   swiper: {

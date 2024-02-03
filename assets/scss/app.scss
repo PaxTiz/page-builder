@@ -54,6 +54,10 @@ body {
     @apply w-full px-4 py-2 text-gray-300 bg-neutral-800 border-solid border border-gray-600 focus:outline-blue-500 rounded;
   }
 
+  .editor {
+    margin-top: 8px;
+  }
+
   textarea {
     resize: vertical;
   }

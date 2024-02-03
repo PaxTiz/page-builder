@@ -23,12 +23,17 @@
     "drizzle-kit": "^0.20.14",
     "eslint": "^8.56.0",
     "nuxt": "^3.10.0",
+    "nuxt-tiptap-editor": "^0.0.13",
     "sass": "^1.70.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "@he-tree/vue": "^2.8.1",
+    "@tiptap/extension-color": "^2.2.1",
+    "@tiptap/extension-text-align": "^2.2.1",
+    "@tiptap/extension-text-style": "^2.2.1",
+    "@tiptap/extension-typography": "^2.2.1",
     "drizzle-orm": "^0.29.3",
     "mysql2": "^3.9.1",
     "nanoid": "^4.0.2",
