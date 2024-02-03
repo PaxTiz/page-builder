@@ -1,5 +1,5 @@
 import { ZodSchema } from 'zod';
-import { Block } from '~/types';
+import type { Block } from '~/types';
 
 export const useBlockValidation = <T extends Block>(validator: ZodSchema) => {
   type Keys = Omit<T, 'id' | 'type' | 'children'>;

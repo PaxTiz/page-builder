@@ -1,5 +1,5 @@
-import { Page } from 'server/schema';
-import { BlockHistory, BlockHistoryItem } from '~/types';
+import { type Page } from '~/server/schema';
+import type { BlockHistory, BlockHistoryItem } from '~/types';
 
 export const usePageHistory = () => {
   const history: Ref<BlockHistory> = useState('blocks_history', () => []);

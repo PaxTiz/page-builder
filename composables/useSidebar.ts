@@ -1,4 +1,4 @@
-import { Block } from '~/types';
+import type { Block } from '~/types';
 
 export const useSidebar = () => {
   const element: Ref<Block | null> = useState(

@@ -1,4 +1,4 @@
-import { Block } from 'types';
+import type { Block } from '~/types';
 
 export const usePreview = () => {
   const preview: Ref<Array<Block>> = useState('preview', () => []);

@@ -1,4 +1,4 @@
-import { ApplicationState, Block } from '~/types';
+import type { ApplicationState, Block } from '~/types';
 
 export const useApplication = () => {
   const state = useState('application_state', () => 'editor');

@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
-import { Page } from '~/server/schema';
-import { Block } from '~/types';
+import { type Page } from '~/server/schema';
+import type { Block } from '~/types';
 
 export const useBlocks = () => {
   const page: Ref<Page> = useState('page', () => ({

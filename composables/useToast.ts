@@ -1,4 +1,4 @@
-import { Toast } from '~/types';
+import type { Toast } from '~/types';
 
 export const useToast = () => {
   const _toast: Ref<Toast | null> = useState('toast', () => null);
