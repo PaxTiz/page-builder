@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CarouselBlock } from '~/types';
+import type { CarouselBlock } from '~/types';
 
 defineProps<{
   block: CarouselBlock;

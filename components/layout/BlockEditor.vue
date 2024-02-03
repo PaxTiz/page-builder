@@ -8,7 +8,7 @@ import ImageBuilder from '~/components/blocks/builders/ImageBuilder.vue';
 import SpacerBuilder from '~/components/blocks/builders/SpacerBuilder.vue';
 import TextBuilder from '~/components/blocks/builders/TextBuilder.vue';
 import { getBlockByType } from '~/constants/blocks';
-import {
+import type {
   Block,
   ButtonBlock,
   CallToActionBlock,

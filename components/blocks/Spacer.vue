@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SpacerBlock } from '~/types';
+import type { SpacerBlock } from '~/types';
 
 const props = defineProps<{
   block: SpacerBlock;

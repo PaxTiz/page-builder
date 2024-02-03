@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ZodSchema } from 'zod';
 import FormBuilder from './FormBuilder.vue';
-import { ContainerBlock } from '~/types';
+import { type ContainerBlock } from '~/types';
 
 const emit = defineEmits<{(e: 'save', block: ContainerBlock): void;}>();
 const props = defineProps<{

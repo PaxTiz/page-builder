@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Block, isContainerBlock } from '~/types';
+import { isContainerBlock, type Block } from '~/types';
 
 // eslint-disable-next-line func-call-spacing
 defineEmits<{

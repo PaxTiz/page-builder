@@ -57,7 +57,7 @@ const { toast } = useToast();
   </div>
 </template>
 
-<sryle lang="scss" scoped>
+<style lang="scss" scoped>
 .toast {
   z-index: 200;
 
@@ -105,4 +105,4 @@ const { toast } = useToast();
         transform:rotate(360deg);
     }
 }
-</sryle>
+</style>

@@ -2,7 +2,7 @@
 import BlockEditor from './BlockEditor.vue';
 import OverlayButton from './OverlayButton.vue';
 import SidebarTree from './SidebarTree.vue';
-import { Block } from '~/types';
+import { type Block } from '~/types';
 
 defineProps<{
   children: Array<Block>;

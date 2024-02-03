@@ -2,7 +2,7 @@
 import { Draggable } from '@he-tree/vue';
 import '@he-tree/vue/style/default.css';
 import SidebarTreeItem from './SidebarTreeItem.vue';
-import { Block, isContainerBlock } from '~/types';
+import { isContainerBlock, type Block } from '~/types';
 
 // eslint-disable-next-line func-call-spacing
 const emit = defineEmits<{

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ZodSchema } from 'zod';
 import FormBuilder from './FormBuilder.vue';
-import { CarouselBlock } from '~/types';
+import { type CarouselBlock } from '~/types';
 
 const emit = defineEmits<{(e: 'save', block: CarouselBlock): void;}>();
 const props = defineProps<{

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import PageRenderer from '~/components/page/PageRenderer.vue';
-import { Block } from '~/types';
+import type { Block } from '~/types';
 
 defineProps<{
   children: Array<Block>;

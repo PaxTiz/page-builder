@@ -6,7 +6,7 @@ import Container from '~/components/blocks/Container.vue';
 import Image from '~/components/blocks/Image.vue';
 import Spacer from '~/components/blocks/Spacer.vue';
 import Text from '~/components/blocks/Text.vue';
-import { Block } from '~/types';
+import { type Block } from '~/types';
 
 defineProps<{
   children: Array<Block>;

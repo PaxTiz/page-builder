@@ -2,7 +2,7 @@
 import { nanoid } from 'nanoid';
 import AddBlockModal from '~/components/modals/AddBlockModal.vue';
 import HistoryModal from '~/components/modals/HistoryModal.vue';
-import { BlockHistoryAction } from '~/types';
+import type { BlockHistoryAction } from '~/types';
 
 const { set } = useToast();
 const { isActive, toggle } = useModal('modal_add_block');

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CallToActionBlock } from '~/types';
+import type { CallToActionBlock } from '~/types';
 
 defineProps<{
   block: CallToActionBlock;

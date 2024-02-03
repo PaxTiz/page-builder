@@ -2,7 +2,7 @@
 import Modal from './Modal.vue';
 import Pagination from '~/components/layout/Pagination.vue';
 import Tabs from '~/components/layout/Tabs.vue';
-import { BlockHistoryAction, BlockHistoryItem } from '~/types';
+import type { BlockHistoryAction, BlockHistoryItem } from '~/types';
 
 const emit = defineEmits<{(e: 'close'): void;}>();
 

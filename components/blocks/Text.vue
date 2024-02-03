@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { TextBlock } from '~/types';
+import type { TextBlock } from '~/types';
 
 defineProps<{
   block: TextBlock;

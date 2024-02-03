@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { VNode } from 'nuxt/dist/app/compat/capi';
-
 defineProps<{
   title: string;
 }>();

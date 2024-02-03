@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ButtonBlock } from '~/types';
+import type { ButtonBlock } from '~/types';
 
 defineProps<{
   block: ButtonBlock;

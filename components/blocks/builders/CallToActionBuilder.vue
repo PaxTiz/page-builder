@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ZodSchema } from 'zod';
 import FormBuilder from './FormBuilder.vue';
-import { CallToActionBlock } from '~/types';
+import { type CallToActionBlock } from '~/types';
 
 const emit = defineEmits<{(e: 'save', block: CallToActionBlock): void;}>();
 const props = defineProps<{

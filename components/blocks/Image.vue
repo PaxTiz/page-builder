@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ImageBlock } from '~/types';
+import type { ImageBlock } from '~/types';
 
 const props = defineProps<{
   block: ImageBlock;
