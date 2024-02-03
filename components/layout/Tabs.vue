@@ -19,17 +19,17 @@ const onSelectTab = (key: string) => {
       <button
         v-for="tab in tabs"
         :key="tab.key"
-        class="border-none px-8 py-4 bg-transparent text-gray-300 cursor-pointer uppercase"
+        class="px-8 py-4 bg-transparent cursor-pointer uppercase"
         :class="{
-          'border-solid border-0 border-b-1 border-blue-500 text-blue-500 font-bold':
-            currentTab === tab.key,
+          'border-b border-blue-500 text-blue-500 font-bold': currentTab === tab.key,
+          'border-none text-gray-300': currentTab !== tab.key,
         }"
         @click="() => onSelectTab(tab.key)"
       >
         {{ tab.title }}
       </button>
     </div>
-    <div class="w-full bg-gray-700" style="height: 1px; margin-top: -1px" />
+    <div class="w-full bg-neutral-700" style="height: 1px; margin-top: -1px" />
 
     <div class="p-8">
       <slot :name="currentTab" />

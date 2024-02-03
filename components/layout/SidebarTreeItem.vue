@@ -16,7 +16,7 @@ const { setElement } = useSidebar();
 
 <template>
   <div
-    class="sidebar__item flex items-center justify-between px-4 py-3 hover:bg-gray-800 rounded-l"
+    class="sidebar__item flex items-center justify-between px-4 py-3 hover:bg-neutral-800 rounded-l"
   >
     <div class="flex items-center gap-2">
       <template v-if="isContainerBlock(block)">
@@ -86,7 +86,7 @@ const { setElement } = useSidebar();
   @apply fill-white;
 }
 .sidebar__item:hover .trash:hover path {
-  @apply fill-red;
+  @apply fill-red-600;
 }
 
 svg {

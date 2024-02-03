@@ -18,7 +18,7 @@ const onMove = (blocks: Array<Block>) => {
 
 <template>
   <div
-    class="sidebar fixed h-screen overflow-scroll bg-gray-900 shadow-white z-10"
+    class="sidebar fixed h-screen overflow-scroll bg-neutral-900 border-r-2 border-neutral-700 z-10"
   >
     <div v-if="element" class="mt-16 mb-8">
       <BlockEditor :block="element" />

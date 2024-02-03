@@ -19,9 +19,9 @@ const slots = defineSlots<{
 
 <template>
   <div class="modal-wrapper fixed w-full h-full top-0 left-0">
-    <div class="bg-gray-900 shadow-white rounded">
+    <div class="bg-neutral-900 border-2 border-neutral-700 rounded">
       <div
-        class="flex justify-between items-center bg-gray-900 p-4 border-solid border-0 border-b border-gray-700 rounded-t"
+        class="flex justify-between items-center bg-neutral-900 p-4 border-solid border-0 border-b border-neutral-700 rounded-t"
       >
         <h2 class="text-gray-300 m-0">
           {{ title }}
@@ -31,7 +31,7 @@ const slots = defineSlots<{
       </div>
 
       <div
-        class="modal__body bg-gray-900 rounded-b"
+        class="modal__body bg-neutral-900 rounded-b"
         :class="{ sidebar: slots.sidebar }"
       >
         <slot name="sidebar" />
@@ -40,7 +40,7 @@ const slots = defineSlots<{
           <slot />
 
           <div
-            class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-gray-700"
+            class="flex justify-end gap-4 px-8 py-4 border-solid border-0 border-t border-neutral-700"
           >
             <slot name="footer" />
           </div>

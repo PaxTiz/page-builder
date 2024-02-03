@@ -48,22 +48,22 @@ defineProps<{
 <style lang="scss" scoped>
 .pagination__item {
   user-select: none;
-  @apply flex justify-center items-center w-[24px] h-[24px] text-gray-300 hover:text-white text-xs border-none bg-gray-800 hover:bg-gray-900 shadow-white-small rounded cursor-pointer;
+  @apply flex justify-center items-center w-[24px] h-[24px] text-gray-300 hover:text-white text-xs border-none bg-neutral-800 hover:bg-neutral-700 shadow-white rounded cursor-pointer;
 
   svg {
     @apply fill-gray-300 w-[16px] h-[16px];
   }
 
   &[disabled] {
-    @apply bg-gray-700 cursor-not-allowed;
+    @apply bg-neutral-700 cursor-not-allowed;
 
     svg {
-      @apply fill-gray-500;
+      @apply fill-neutral-500;
     }
   }
 }
 
 .active {
-  @apply bg-gray-900 shadow-blue text-white font-bold;
+  @apply bg-neutral-700 shadow-blue-500 text-white font-bold;
 }
 </style>

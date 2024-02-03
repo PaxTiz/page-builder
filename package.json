@@ -17,8 +17,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@unocss/nuxt": "^0.55.7",
-    "@unocss/transformer-directives": "^0.53.6",
+    "@nuxtjs/tailwindcss": "^6.11.3",
     "@vueuse/core": "^10.7.2",
     "@vueuse/nuxt": "^10.7.2",
     "drizzle-kit": "^0.20.14",

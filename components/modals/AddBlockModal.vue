@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Modal from './Modal.vue';
+import Button from '~/components/internal/Button.vue';
 import categories from '~/constants/block_categories';
 import allBlocks from '~/constants/blocks';
 
@@ -31,6 +32,10 @@ const insertNewBlock = () => {
 
   emit('close');
 };
+
+watch(selectedCategory, () => {
+  selectedBlock.value = null;
+});
 </script>
 
 <template>
@@ -38,7 +43,7 @@ const insertNewBlock = () => {
     <template #header>
       <input
         v-model="searchQuery"
-        class="px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded"
+        class="px-4 py-2 text-gray-300 bg-neutral-800 border-solid border border-neutral-600 focus:outline-blue-500 rounded"
         type="text"
         placeholder="Search..."
       >
@@ -46,13 +51,13 @@ const insertNewBlock = () => {
 
     <template #sidebar>
       <div
-        class="overflow-scroll flex flex-col border-solid border-0 border-r border-gray-700"
+        class="overflow-scroll flex flex-col border-solid border-0 border-r border-neutral-700"
       >
         <div
           v-for="category in categories"
           :key="category.id"
-          class="px-4 py-2 cursor-pointer hover:bg-gray-800"
-          :class="{ 'bg-gray-800': selectedCategory === category.id }"
+          class="px-4 py-2 cursor-pointer hover:bg-neutral-800"
+          :class="{ 'bg-neutral-800': selectedCategory === category.id }"
           @click="() => (selectedCategory = category.id)"
         >
           <span class="text-gray-300">{{ category.name }}</span>
@@ -61,15 +66,11 @@ const insertNewBlock = () => {
     </template>
 
     <template #footer>
-      <button class="button-red" @click="$emit('close')">
-        Cancel
-      </button>
-      <button class="button-blue" @click="insertNewBlock">
-        Add block
-      </button>
+      <Button label="Cancel" variant="danger" @click="$emit('close')" />
+      <Button label="Add block" @click="insertNewBlock" />
     </template>
 
-    <div class="h-70 overflow-scroll p-8">
+    <div class="h-72 overflow-scroll p-8">
       <div class="grid grid-cols-3 gap-4">
         <template v-if="blocks.length > 1">
           <div
@@ -79,7 +80,7 @@ const insertNewBlock = () => {
             :class="
               selectedBlock === block.default.type
                 ? 'border-dashed border-blue'
-                : 'border-solid border-gray bg-gray-800'
+                : 'border-solid border-neutral-600 bg-neutral-800'
             "
             @click="() => (selectedBlock = block.default.type)"
           >

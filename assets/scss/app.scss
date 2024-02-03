@@ -6,7 +6,6 @@
 body {
   margin: 0;
   padding: 0;
-  @apply bg-gray-800;
 }
 
 .__block:hover {
@@ -37,13 +36,13 @@ body {
 
     &.error {
       span {
-        @apply block text-red mt-2;
+        @apply block text-red-600 mt-2;
       }
 
       input,
       textarea,
       select {
-        @apply border-red;
+        @apply border-red-600;
       }
     }
   }
@@ -52,7 +51,7 @@ body {
   textarea,
   select {
     margin-top: 8px;
-    @apply w-full px-4 py-2 text-gray-300 bg-gray-800 border-solid border-1 border-gray focus:outline-blue-500 rounded;
+    @apply w-full px-4 py-2 text-gray-300 bg-neutral-800 border-solid border border-gray-600 focus:outline-blue-500 rounded;
   }
 
   textarea {

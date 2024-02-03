@@ -1,5 +1,5 @@
 import { ZodSchema, z } from 'zod';
-import { Block, BlockType } from '~/types';
+import type { Block, BlockType } from '~/types';
 
 const blocks: Array<{
   categoryId: number;

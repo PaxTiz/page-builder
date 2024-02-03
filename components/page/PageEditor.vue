@@ -7,12 +7,12 @@ const { page } = useBlocks();
 </script>
 
 <template>
-  <div class="bg-gray-800">
+  <div class="bg-neutral-800">
     <Sidebar :children="page.blocks" />
     <Topbar />
 
     <div class="page pt-20 pb-10 z-0 px-8">
-      <div class="shadow-white bg-gray-900 rounded">
+      <div class="border-2 border-neutral-700 bg-white rounded">
         <PageRenderer :children="page.blocks" />
       </div>
     </div>

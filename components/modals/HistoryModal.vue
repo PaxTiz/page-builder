@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Modal from './Modal.vue';
+import Button from '~/components/internal/Button.vue';
 import Pagination from '~/components/layout/Pagination.vue';
 import Tabs from '~/components/layout/Tabs.vue';
 import type { BlockHistoryAction, BlockHistoryItem } from '~/types';
@@ -60,19 +61,17 @@ const onRestore = (item: BlockHistoryItem) => {
 <template>
   <Modal title="Page History">
     <template #footer>
-      <button class="button-red" @click="emit('close')">
-        close
-      </button>
+      <Button label="Close" variant="danger" @click="emit('close')" />
     </template>
 
-    <div class="h-98 overflow-scroll">
+    <div class="h-96 overflow-scroll">
       <Tabs :tabs="tabs">
         <template #local>
-          <div class="w-120">
+          <div class="w-21rem">
             <table
-              class="border-collapse w-full text-sm text-left text-gray-400 shadow-white rounded"
+              class="border-collapse w-full text-sm text-left text-neutral-400 border-2 border-neutral-700 rounded"
             >
-              <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+              <thead class="text-xs uppercase bg-neutral-700 text-neutral-400">
                 <tr>
                   <th>Action</th>
                   <th>Saved At</th>
@@ -90,18 +89,17 @@ const onRestore = (item: BlockHistoryItem) => {
                   </td>
                   <td>{{ new Date(history.timestamp).toLocaleString() }}</td>
                   <td class="flex gap-2">
-                    <button
-                      class="button-gray button-small"
+                    <Button
+                      label="Preview"
+                      variant="secondary"
+                      size="small"
                       @click="() => onPreview(history)"
-                    >
-                      Preview
-                    </button>
-                    <button
-                      class="button-blue button-small"
+                    />
+                    <Button
+                      label="Restore"
+                      size="small"
                       @click="() => onRestore(history)"
-                    >
-                      Restore
-                    </button>
+                    />
                   </td>
                 </tr>
               </tbody>
@@ -132,7 +130,7 @@ table {
 
   tbody {
     tr {
-      @apply bg-gray-800 hover:bg-gray-900;
+      @apply bg-neutral-800 hover:bg-neutral-900;
     }
 
     tr:last-of-type td:first-of-type {
@@ -143,7 +141,7 @@ table {
     }
 
     tr:not(:last-of-type) {
-      @apply border-solid border-0 border-b border-gray-700;
+      @apply border-solid border-0 border-b border-neutral-700;
     }
   }
 

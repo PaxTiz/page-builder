@@ -4,7 +4,11 @@ export default defineNuxtConfig({
 
   css: ['~/assets/scss/app.scss'],
 
-  modules: ['@unocss/nuxt', 'nuxt-swiper', '@vueuse/nuxt'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-swiper', 
+    '@vueuse/nuxt'
+  ],
 
   swiper: {
     modules: ['autoplay', 'navigation', 'pagination'],

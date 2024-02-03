@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <p class="text-gray-300 m-0 leading-relaxed" v-html="block.text" />
+  <p class="__block text-gray-300 m-0 leading-relaxed" v-html="block.text" />
 </template>
 
 <style lang="scss" scoped></style>
