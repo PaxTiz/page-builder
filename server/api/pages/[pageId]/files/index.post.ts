@@ -5,22 +5,21 @@ import { eq } from 'drizzle-orm';
 import { z } from 'zod';
 import { database } from '../../../../database';
 import { pages } from '../../../../schema';
-import { createFormError, validate } from '../../../../validation';
+import { validate } from '../../../../validation';
 
 const BASE_STORAGE_PATH = join('.', 'server', 'storage', 'media', 'pages');
 
 export default eventHandler(async (event) => {
-  const schema = z.object({
-    pageId: z.string().uuid(),
+  const { params, files } = await validate(event, {
+    params: z.object({
+      pageId: z.string().uuid(),
+    }),
+    files: {
+      file: {
+        required: true,
+      },
+    },
   });
-
-  const params = await validate<z.infer<typeof schema>>(event, schema, ['params']);
-
-  const files = await readMultipartFormData(event);
-
-  if (!files || files.length !== 1) {
-    throw createFormError({ key: 'file', value: 'only_one_file_allowed' });
-  }
 
   const exists = await database.query.pages.findFirst({
     where: eq(pages.id, params.pageId),
@@ -35,7 +34,7 @@ export default eventHandler(async (event) => {
     await mkdir(pageDirectory, { recursive: true });
   }
 
-  const file = files[0];
+  const file = files.file;
   await writeFile(join(BASE_STORAGE_PATH, params.pageId, file.filename!), file.data);
 
   return {

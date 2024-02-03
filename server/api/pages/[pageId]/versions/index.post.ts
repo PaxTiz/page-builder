@@ -1,9 +1,9 @@
 import { eq, sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { historyActions } from '../../../../types';
-import { database } from '../../../database';
-import { pages, pagesHistory } from '../../../schema';
-import { validate } from '../../../validation';
+import { database } from '~/server/database';
+import { pages, pagesHistory } from '~/server/schema';
+import { validate } from '~/server/validation';
+import { historyActions } from '~/types';
 
 export default eventHandler(async (event) => {
   const { params, body } = await validate(event, {
@@ -11,14 +11,10 @@ export default eventHandler(async (event) => {
       pageId: z.string().uuid(),
     }),
     body: z.object({
-      name: z.string(),
-      slug: z.string(),
+      id: z.string().length(10),
+      timestamp: z.number(),
+      action: z.enum(historyActions),
       blocks: z.array(z.any()),
-      history: z.object({
-        id: z.string().length(10),
-        timestamp: z.number(),
-        action: z.enum(historyActions),
-      }),
     }),
   });
 
@@ -46,19 +42,13 @@ export default eventHandler(async (event) => {
     }
 
     await tx.insert(pagesHistory).values({
-      id: body.history.id,
-      action: body.history.action,
-      timestamp: new Date(body.history.timestamp),
+      id: body.id,
+      action: body.action,
+      timestamp: new Date(body.timestamp),
       blocks: body.blocks,
       pageId: params.pageId,
     });
-
-    await tx.update(pages).set({
-      name: body.name,
-      slug: body.slug,
-      blocks: body.blocks,
-    }).where(eq(pages.id, params.pageId));
   });
 
-  return { message: 'page_updated' };
+  return { message: 'page_history_created' };
 });
